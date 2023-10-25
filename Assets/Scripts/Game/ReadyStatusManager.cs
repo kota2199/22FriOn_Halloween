@@ -29,7 +29,7 @@ public class ReadyStatusManager : StrixBehaviour
     // Update is called once per frame
     void Update()
     {
-        StrixNetwork.instance.roomSession.roomClient.RoomSetMemberNotified += roomSetArgs =>
+        strixNetwork.roomSession.roomClient.RoomSetMemberNotified += roomSetArgs =>
         {
             checkAllMembers();
         };

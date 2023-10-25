@@ -96,6 +96,25 @@ public class ConnectToRoom : StrixBehaviour
                 playerName: playerName,
                 handler: __ =>
                 {
+                    strixNetwork.SetRoomMember
+                    (
+                        strixNetwork.selfRoomMember.GetPrimaryKey(),
+                        new Dictionary<string, object>()
+                        {
+                            { "properties", new Dictionary<string, object>()
+                                {
+                                    { "state", 0 }
+                                }
+                            }
+                        },
+                        args =>
+                          {
+                              Debug.Log("SetRoomMember succeeded");
+                          },
+                          args => {
+                              Debug.Log("SetRoomMember failed. error = " + args.cause);
+                          }
+                    );
                     Debug.Log("Room joined.");
                 },
                 failureHandler: joinError => Debug.LogError("Join failed. Reason: " + joinError.cause)
@@ -124,6 +143,7 @@ public class ConnectToRoom : StrixBehaviour
                 },
                 failureHandler: createRoomError => Debug.LogError("Could not create room. Reason: " + createRoomError.cause)
             );
+        
 
         connectPanel.SetActive(false);
         readyUI.SetActive(true);
