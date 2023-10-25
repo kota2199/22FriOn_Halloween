@@ -19,42 +19,53 @@ namespace SoftGear.Strix.Unity.Runtime {
             if (strixNetwork == null)
                 return;
 
-            if (MasterSessionStatusText != null) {
+            if (MasterSessionStatusText != null)
+            {
                 MasterSessionStatusText.text = strixNetwork.masterSession.IsConnected ? strixNetwork.masterSession.messageChannel.GetRemoteAddress().ToString() : "Not connected";
             }
 
-            if (RoomSessionStatusText != null) {
+            if (RoomSessionStatusText != null)
+            {
                 RoomSessionStatusText.text = strixNetwork.roomSession.IsConnected ? strixNetwork.roomSession.messageChannel.GetRemoteAddress().ToString() : "Not connected";
             }
 
             CustomizableMatchRoom room = strixNetwork.roomSession.room;
 
-            if (RoomIdText != null) {
+            if (RoomIdText != null)
+            {
                 RoomIdText.text = (room != null ? room.GetPrimaryKey().ToString() : "");
             }
 
-            if (RoomNameText != null) {
+            if (RoomNameText != null)
+            {
                 RoomNameText.text = (room != null ? room.GetName() : "");
             }
 
-            if (RoomOwnerUidText != null) {
+            if (RoomOwnerUidText != null)
+            {
                 RoomOwnerUidText.text = (room != null ? room.GetOwnerUid().ToString() : "");
             }
 
-            if (RoomMemberCountText != null) {
+            if (RoomMemberCountText != null)
+            {
                 RoomMemberCountText.text = (room != null ? room.GetMemberCount() + "/" + room.GetCapacity() : "");
             }
 
-            if (RoomMemberList != null) {
+            if (RoomMemberList != null)
+            {
                 string text = "";
 
-                if (strixNetwork.sortedRoomMembers != null) {
-                    foreach (var entry in strixNetwork.sortedRoomMembers) {
+                if (strixNetwork.sortedRoomMembers != null)
+                {
+                    foreach (var entry in strixNetwork.sortedRoomMembers)
+                    {
                         CustomizableMatchRoomMember member = (CustomizableMatchRoomMember)entry;
                         string properties = "";
 
-                        if (member.GetProperties() != null) {
-                            foreach (KeyValuePair<string, object> v in member.GetProperties()) {
+                        if (member.GetProperties() != null)
+                        {
+                            foreach (KeyValuePair<string, object> v in member.GetProperties())
+                            {
                                 properties += " " + v.Key + ":" + v.Value;
                             }
                         }

@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using SoftGear.Strix.Unity.Runtime;
 
-public class ScoreManager : MonoBehaviour
+
+public class ScoreManager : StrixBehaviour
 {
     public static ScoreManager instance;
 
+    [StrixSyncField]
     public int totalScore = 0;
 
     [SerializeField]

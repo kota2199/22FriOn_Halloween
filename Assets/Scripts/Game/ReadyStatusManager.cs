@@ -11,7 +11,7 @@ using System.Linq;
 public class ReadyStatusManager : StrixBehaviour
 {
     [SerializeField]
-    GameObject readyUi, countDownUi;
+    GameObject readyUi, countDownUi, waitingUi;
 
     [SerializeField]
     Text countDownText;
@@ -31,8 +31,7 @@ public class ReadyStatusManager : StrixBehaviour
     {
         StrixNetwork.instance.roomSession.roomClient.RoomSetMemberNotified += roomSetArgs =>
         {
-            RpcToAll("checkAllMembers");
-            //checkAllMemberss();
+            checkAllMembers();
         };
     }
     public void OnReady()
@@ -59,7 +58,7 @@ public class ReadyStatusManager : StrixBehaviour
         readyUi.SetActive(false);
         countDownUi.SetActive(true);
         //FOR DEBUG
-        StartCoroutine(CountDown());
+        //StartCoroutine(CountDown());
     }
     public void checkAllMembers()
     {
@@ -70,15 +69,16 @@ public class ReadyStatusManager : StrixBehaviour
     }
     private IEnumerator CountDown()
     {
-        for(int i = 2; i < -1; i--)
-        {
-            countDownText.text = (i + 1).ToString();
-            yield return new WaitForSeconds(1);
-        }
+        yield return new WaitForSeconds(1);
+        countDownText.text = "3";
+        yield return new WaitForSeconds(1);
+        countDownText.text = "2";
+        yield return new WaitForSeconds(1);
+        countDownText.text = "1";
         yield return new WaitForSeconds(1);
         countDownText.text = "Go!";
         yield return new WaitForSeconds(1);
-        countDownUi.SetActive(false);
+        waitingUi.SetActive(false);
     }
     public static bool CheckAllRoomMembersState(int desiredState)
     {

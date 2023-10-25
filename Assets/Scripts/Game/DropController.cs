@@ -33,8 +33,7 @@ public class DropController : StrixBehaviour
         {
             return;
         }
-        RpcToAll("GeneratePiece");
-        //GeneratePiece();
+        GeneratePiece();
     }
 
     // Update is called once per frame
@@ -90,7 +89,6 @@ public class DropController : StrixBehaviour
         }
         isMovingLeft = false;
     }
-    [StrixRpc]
     void GeneratePiece()
     {
         if (!isLocal)

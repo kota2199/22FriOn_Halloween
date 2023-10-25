@@ -42,6 +42,7 @@ namespace SoftGear.Strix.Unity.Runtime
                                 properties += " " + v.Key + ":" + v.Value;
                             }
                         }
+
                         text += member.GetName() + properties + "\n";
                     }
                 }

@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SoftGear.Strix.Unity.Runtime;
 
-public class CollideAndGenerateManager : MonoBehaviour
+public class CollideAndGenerateManager : StrixBehaviour
 {
     public static CollideAndGenerateManager instance;
 
