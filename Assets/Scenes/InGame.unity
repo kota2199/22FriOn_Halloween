@@ -2142,7 +2142,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3191971249782017787, guid: 4cdc092255b9cd14b88005b0c3c8e726, type: 3}
   m_PrefabInstance: {fileID: 8044520968123549695}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1693299565}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f56a63d7634bea4ea68320fe4a72e44, type: 3}
@@ -3427,6 +3427,7 @@ MonoBehaviour:
   waitingUi: {fileID: 1464290448}
   countDownText: {fileID: 1722445933}
   readyButton: {fileID: 154675815}
+  player: {fileID: 1693299565}
 --- !u!114 &1464290454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3441,7 +3442,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strixBehaviours:
   - {fileID: 1464290453}
-  objectType: 262147
+  objectType: 262148
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1
@@ -4195,6 +4196,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687040583}
   m_CullTransparentMesh: 1
+--- !u!1 &1693299565 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4385923989917455257, guid: 4cdc092255b9cd14b88005b0c3c8e726, type: 3}
+  m_PrefabInstance: {fileID: 8044520968123549695}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1698027770
 GameObject:
   m_ObjectHideFlags: 0

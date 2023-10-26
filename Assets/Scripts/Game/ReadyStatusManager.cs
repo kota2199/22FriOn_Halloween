@@ -20,6 +20,9 @@ public class ReadyStatusManager : StrixBehaviour
 
     [SerializeField]
     Button readyButton;
+
+    [SerializeField]
+    GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +53,7 @@ public class ReadyStatusManager : StrixBehaviour
                    args =>
                    {
                        Debug.Log("SetRoomMember succeeded");
+                       checkAllMembers();
                    },
                    args => {
                        Debug.Log("SetRoomMember failed. error = " + args.cause);
@@ -57,15 +61,18 @@ public class ReadyStatusManager : StrixBehaviour
                );
         readyUi.SetActive(false);
         countDownUi.SetActive(true);
-        //FOR DEBUG
-        //StartCoroutine(CountDown());
     }
     public void checkAllMembers()
     {
-        if (CheckAllRoomMembersState(1))
+        if (CheckAllRoomMembersState() && strixNetwork.room.GetMemberCount() > 1)
         {
-            StartCoroutine(CountDown());
+            CallCountDown();
         }
+    }
+
+    public void CallCountDown()
+    {
+        StartCoroutine(CountDown());
     }
     private IEnumerator CountDown()
     {
@@ -78,10 +85,12 @@ public class ReadyStatusManager : StrixBehaviour
         yield return new WaitForSeconds(1);
         countDownText.text = "Go!";
         yield return new WaitForSeconds(1);
+        player.GetComponent<DropController>().GeneratePiece();
         waitingUi.SetActive(false);
     }
-    public static bool CheckAllRoomMembersState(int desiredState)
+    public static bool CheckAllRoomMembersState()
     {
+        var room = StrixNetwork.instance.room;
         foreach (var roomMember in StrixNetwork.instance.roomMembers)
         {
             if (!roomMember.Value.GetProperties().TryGetValue("state",
@@ -90,7 +99,7 @@ public class ReadyStatusManager : StrixBehaviour
                 return false;
             }
 
-            if ((int)value != desiredState)
+            if ((int)value != 1)
             {
                 return false;
             }

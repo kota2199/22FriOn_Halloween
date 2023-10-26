@@ -75,14 +75,22 @@ public class ConnectToRoom : StrixBehaviour
                 offset: 0,
                 handler: searchResults => 
                 {
-                    Debug.Log(searchResults.roomInfoCollection.Count + " rooms found.");
+                    if(searchResults.roomInfoCollection.Count < 1)
+                    {
+                        CreatRoom();
 
-                    foreach (var roomInfo in searchResults.roomInfoCollection)
-                        JoinRoom(roomInfo.host, roomInfo.port, roomInfo.protocol, roomInfo.id);
+                    }
+                    else
+                    {
+                        Debug.Log(searchResults.roomInfoCollection.Count + " rooms found.");
+
+                        foreach (var roomInfo in searchResults.roomInfoCollection)
+                            JoinRoom(roomInfo.host, roomInfo.port, roomInfo.protocol, roomInfo.id);
+                    }
+
                 },
                 failureHandler: searchError => Debug.Log("Search failed. Reason: " + searchError.cause)
             );
-        CreatRoom();
     }
 
     public void JoinRoom(string host, int port, string protocol, long id)
@@ -119,6 +127,8 @@ public class ConnectToRoom : StrixBehaviour
                 },
                 failureHandler: joinError => Debug.LogError("Join failed. Reason: " + joinError.cause)
             );
+        connectPanel.SetActive(false);
+        readyUI.SetActive(true);
     }
     public void CreatRoom()
     {
@@ -143,16 +153,7 @@ public class ConnectToRoom : StrixBehaviour
                 },
                 failureHandler: createRoomError => Debug.LogError("Could not create room. Reason: " + createRoomError.cause)
             );
-        
-
         connectPanel.SetActive(false);
         readyUI.SetActive(true);
     }
-
-    public void Ready()
-    {
-
-    }
-    
-
 }

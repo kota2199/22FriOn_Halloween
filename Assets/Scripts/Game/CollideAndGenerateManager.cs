@@ -27,24 +27,13 @@ public class CollideAndGenerateManager : StrixBehaviour
             Destroy(this);
         }
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void CollideNotice(GameObject hitObj, GameObject selfObj, CollideManager.TypeOfPiece type)
     {
         if(hitObj == hitObj2 && selfObj == hitObj1)
         {
             genePos = (hitObj1.transform.position + hitObj2.transform.position) / 2f;
-            GenerateNextPiece(type);
+            RpcToAll(nameof(GenerateNextPiece), type);
+            //GenerateNextPiece(type);
         }
         else
         {

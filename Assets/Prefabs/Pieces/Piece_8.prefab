@@ -178,6 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strixBehaviours:
+  - {fileID: 1397628087889164038}
   - {fileID: 3499026679125222082}
   objectType: 11
   sendRate: 5
