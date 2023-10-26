@@ -11,7 +11,7 @@ public class DropController : StrixBehaviour
 
     public GameObject[] Pieces;
 
-    //[StrixSyncField][HideInInspector]
+    [StrixSyncField]
     public GameObject SetPiece = null;
 
     [SerializeField]
@@ -52,10 +52,6 @@ public class DropController : StrixBehaviour
         else if(isMovingLeft && currentPos > -3 && !dropped)
         {
             transform.position -= new Vector3(2f, 0, 0) * Time.deltaTime;
-        }
-        if(SetPiece != null)
-        {
-            //SetPiece.GetComponent<Rigidbody2D>().simulated = isSimulate;
         }
     }
 
@@ -104,12 +100,10 @@ public class DropController : StrixBehaviour
         {
             return;
         }
-        {
             SetPiece = Instantiate(PieceSet(), transform.position, Quaternion.identity);
             SetPiece.transform.SetParent(gameObject.transform);
             dropped = false;
             dropButton.SetActive(true);
-        }
     }
     private GameObject PieceSet()
     {
