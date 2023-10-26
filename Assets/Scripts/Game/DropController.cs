@@ -11,31 +11,12 @@ public class DropController : StrixBehaviour
 
     public GameObject[] Pieces;
 
-    //[StrixSyncField][HideInInspector]
-    public GameObject SetPiece = null;
+    public GameObject SetPiece;
 
     [SerializeField]
     GameObject dropButton;
 
     bool dropped = true;
-
-    [StrixSyncField]
-    public bool isSimulate = false;
-    void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
-    }
-    void Start()
-    {
-        //GeneratePiece();
-    }
 
     // Update is called once per frame
     void Update()
@@ -52,10 +33,6 @@ public class DropController : StrixBehaviour
         else if(isMovingLeft && currentPos > -3 && !dropped)
         {
             transform.position -= new Vector3(2f, 0, 0) * Time.deltaTime;
-        }
-        if(SetPiece != null)
-        {
-            //SetPiece.GetComponent<Rigidbody2D>().simulated = isSimulate;
         }
     }
 
@@ -95,21 +72,27 @@ public class DropController : StrixBehaviour
     }
     public void GenerateForWait()
     {
+        if (!isLocal)
+        {
+            return;
+        }
+        Debug.Log("GeneratePiece");
         RpcToAll(nameof(GeneratePiece));
     }
     [StrixRpc]
     public void GeneratePiece()
     {
+        Debug.Log("Instantiate");
+        SetPiece = Instantiate(PieceSet(), transform.position, Quaternion.identity);
+        dropped = false;
         if (!isLocal)
         {
             return;
         }
-        {
-            SetPiece = Instantiate(PieceSet(), transform.position, Quaternion.identity);
-            SetPiece.transform.SetParent(gameObject.transform);
-            dropped = false;
-            dropButton.SetActive(true);
-        }
+
+        Debug.Log("SetParent");
+        SetPiece.transform.SetParent(gameObject.transform);
+        dropButton.SetActive(true);
     }
     private GameObject PieceSet()
     {
@@ -117,29 +100,32 @@ public class DropController : StrixBehaviour
         {
             return null;
         }
+        Debug.Log("PieceSet");
         int randomeNum = Random.Range(0, 5);
         GameObject piece = Pieces[randomeNum];
         return piece;
     }
     public void DropPiece()
     {
+        Debug.Log("DropPiece");
+        RpcToAll(nameof(Drop));
         if (!isLocal)
         {
             return;
         }
-        RpcToAll(nameof(Drop));
     }
 
     [StrixRpc]
     public void Drop()
     {
-        isSimulate = true;
-        //CollideManager collideManager = SetPiece.GetComponent<CollideManager>();
-        //RpcToAll(nameof(collideManager.Simulate));
-        SetPiece.GetComponent<Rigidbody2D>().simulated = isSimulate;
+        if (!isLocal)
+        {
+            return;
+        }
+        Debug.Log("Drop");
+        SetPiece.GetComponent<CollideManager>().SimulateOn();
         SetPiece.transform.parent = null;
         dropped = true;
-        dropButton.SetActive(false);
         Invoke("GenerateForWait", 3f);
     }
 }

@@ -15,22 +15,37 @@ public class CollideManager : StrixBehaviour
 
     public TypeOfPiece typeOfPiece;
 
-    [SerializeField]
-    GameObject testObj;
+    GameObject manager;
+
+    private void Start()
+    {
+        manager = GameObject.FindWithTag("Manager");
+        Debug.Log(manager);
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.GetComponent<CollideManager>()
             && collision.gameObject.GetComponent<CollideManager>().typeOfPiece == typeOfPiece)
         {
-            CollideAndGenerateManager.instance.CollideNotice
+            manager.GetComponent<CollideAndGenerateManager>().CollideNotice
                 (this.gameObject, collision.gameObject, typeOfPiece);
             Destroy(this.gameObject);
         }
+    }
+
+    //Turn on Rigidbody2D's simulated.
+    public void SimulateOn()
+    {
+        if (!isLocal)
+        {
+            return;
+        }
+        RpcToAll(nameof(Simulate));
     }
     [StrixRpc]
     public void Simulate()
     {
         isSimulated = true;
-        this.gameObject.GetComponent<Rigidbody2D>().simulated = isSimulated;
+        GetComponent<Rigidbody2D>().simulated = isSimulated;
     }
 }

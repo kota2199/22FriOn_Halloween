@@ -85,7 +85,7 @@ public class ReadyStatusManager : StrixBehaviour
         yield return new WaitForSeconds(1);
         countDownText.text = "Go!";
         yield return new WaitForSeconds(1);
-        player.GetComponent<DropController>().GeneratePiece();
+        player.GetComponent<DropController>().GenerateForWait();
         waitingUi.SetActive(false);
     }
     public static bool CheckAllRoomMembersState()

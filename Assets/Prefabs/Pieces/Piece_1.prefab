@@ -101,7 +101,7 @@ Rigidbody2D:
   m_Simulated: 0
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -163,8 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ee291b04e80ff74989bcb201df7cbaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSimulated: 0
   typeOfPiece: 0
-  testObj: {fileID: 2780598630234121099}
 --- !u!114 &-1508601502849018809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,7 +181,7 @@ MonoBehaviour:
   - {fileID: 8861751730520833704}
   - {fileID: 2009179798097246704}
   objectType: 14
-  sendRate: 5
+  sendRate: 30
   syncDestroy: 1
   networkInstanceId: -1
   InstantiableBy: 1

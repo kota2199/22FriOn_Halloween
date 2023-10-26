@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -101,7 +101,7 @@ Rigidbody2D:
   m_Simulated: 0
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -163,8 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ee291b04e80ff74989bcb201df7cbaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSimulated: 0
   typeOfPiece: 6
-  testObj: {fileID: 2780598630234121099, guid: 310812808ad06e84199b86fa993979fa, type: 3}
 --- !u!114 &8960701123393547264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,7 +181,7 @@ MonoBehaviour:
   - {fileID: 84428075872021969}
   - {fileID: -4182220597191403714}
   objectType: 10
-  sendRate: 5
+  sendRate: 30
   syncDestroy: 1
   networkInstanceId: -1
   InstantiableBy: 1
