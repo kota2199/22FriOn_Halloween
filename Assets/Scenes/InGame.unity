@@ -573,7 +573,7 @@ MonoBehaviour:
   strixBehaviours:
   - {fileID: 303245737}
   - {fileID: 303245738}
-  objectType: 262145
+  objectType: 262151
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1
@@ -1957,7 +1957,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strixBehaviours:
   - {fileID: 830921897}
-  objectType: 262146
+  objectType: 262152
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1
@@ -5221,7 +5221,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8097682066155857495, guid: 4cdc092255b9cd14b88005b0c3c8e726, type: 3}
       propertyPath: objectType
-      value: 262147
+      value: 262153
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
