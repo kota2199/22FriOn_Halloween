@@ -11,9 +11,24 @@ public class ResultUICanvas : MonoBehaviour
     [SerializeField] Sprite[] yokaiSprites;
 
     [SerializeField] Text resultText;
+
     [SerializeField] Image resultYokaiImage;
     [SerializeField] Text resultScoreText;
     [SerializeField] Text resultYokaiNameText;
+
+    int yokaiIndex;
+
+    [SerializeField] string[] virtualBGUrls =
+    {
+        "https://www.google.co.jp",
+        "https://www.youtube.com",
+        "https://fast.com/ja/",
+        "https://www.yahoo.co.jp/",
+        "https://www.google.co.jp",
+        "https://www.youtube.com",
+        "https://fast.com/ja/",
+        "https://www.yahoo.co.jp/",
+    };
 
     [SerializeField] Text flavourText;
 
@@ -60,12 +75,21 @@ public class ResultUICanvas : MonoBehaviour
 
         resultText.text = isTimeUp ? "タイムアップ！" : "ゲームオーバー！";
         
-
-        resultYokaiImage.sprite = yokaiSprites[yokaiIndex];
         resultScoreText.text = score.ToString();
 
+        resultYokaiImage.sprite = yokaiSprites[yokaiIndex];
         resultYokaiNameText.text = yokaiNames[yokaiIndex];
 
+        this.yokaiIndex = yokaiIndex;
+
         flavourText.text = flavourTexts[Random.Range(0, flavourTexts.Length)];
+
+
+    }
+
+
+    public void OpenVirtualBGUrl()
+    {
+        Application.OpenURL(virtualBGUrls[yokaiIndex]);
     }
 }
