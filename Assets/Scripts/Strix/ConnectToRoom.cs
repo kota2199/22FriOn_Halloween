@@ -13,6 +13,8 @@ public class ConnectToRoom : StrixBehaviour
     string playerName = "Player";
     string roomName = "Room_A";
 
+    string webGLHostUrl;
+
     [SerializeField]
     Dropdown roomNameField;
     [SerializeField]
@@ -28,21 +30,25 @@ public class ConnectToRoom : StrixBehaviour
     {
         strixNetwork = StrixNetwork.instance;
 
-        // これは仮の値です。実際のアプリケーションIDに変更してください
-        // Strix Cloudのアプリケーション情報タブにあります: https://www.strixcloud.net/app/applist
+        webGLHostUrl = "wss://" + "32ae743d6ca4d45daf916f97.game.strixcloud.net" + ":9122";
+
         strixNetwork.applicationId = "3de7734b-7f47-4673-bfb1-5415554765e4";
 
-        // まずマスターサーバーに接続します
-        strixNetwork.ConnectMasterServer(
-            // これは仮の値です。実際のマスターホスト名に変更してください。
-            // Strix Cloudのアプリケーション情報タブにあります: https://www.strixcloud.net/app/applist
-            host: "32ae743d6ca4d45daf916f97.game.strixcloud.net",
+        strixNetwork.ConnectMasterServer(webGLHostUrl,
             connectEventHandler: _ => {
                 Debug.Log("Connection established.");
             },
             errorEventHandler: connectError => Debug.LogError("Connection failed. Reason: " + connectError.cause)
         );
+        /*strixNetwork.ConnectMasterServer("32ae743d6ca4d45daf916f97.game.strixcloud.net" ,9122,
+    connectEventHandler: _ => 
+    {
+        Debug.Log("Connection established.");
+    },
+    errorEventHandler: connectError => Debug.LogError("Connection failed. Reason: " + connectError.cause));
+        */
     }
+
     public void ChangeRoom()
     {
         if (!isLocal)
@@ -61,11 +67,52 @@ public class ConnectToRoom : StrixBehaviour
         {
             roomName = "Room_C";
         }
+        else if (roomNameField.value == 3)
+        {
+            roomName = "Room_D";
+        }
+        else if (roomNameField.value == 4)
+        {
+            roomName = "Room_E";
+        }
+        else if (roomNameField.value == 5)
+        {
+            roomName = "Room_F";
+        }
+        else if (roomNameField.value == 6)
+        {
+            roomName = "Room_G";
+        }
+        else if (roomNameField.value == 7)
+        {
+            roomName = "Room_H";
+        }
+        else if (roomNameField.value == 8)
+        {
+            roomName = "Room_I";
+        }
+        else if (roomNameField.value == 9)
+        {
+            roomName = "Room_J";
+        }
+        else if (roomNameField.value == 10)
+        {
+            roomName = "Room_K";
+        }
+        else if (roomNameField.value == 11)
+        {
+            roomName = "Room_L";
+        }
+        else if (roomNameField.value == 12)
+        {
+            roomName = "Room_M";
+        }
         Debug.Log(roomName);
     }
 
     public void SerchRoom()
     {
+        SEController.Instance.PlaySe(0);
         playerName = playerNameField.text.ToString();
 
         strixNetwork.SearchRoom
@@ -78,7 +125,6 @@ public class ConnectToRoom : StrixBehaviour
                     if(searchResults.roomInfoCollection.Count < 1)
                     {
                         CreatRoom();
-
                     }
                     else
                     {

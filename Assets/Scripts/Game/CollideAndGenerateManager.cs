@@ -16,6 +16,12 @@ public class CollideAndGenerateManager : StrixBehaviour
     [SerializeField]
     int[] scoreAmount;
 
+    [SerializeField]
+    GameObject[] Pieces;
+
+    [StrixSyncField]
+    public bool isSimulated = false;
+
     void Awake()
     {
         if (instance == null)
@@ -27,13 +33,22 @@ public class CollideAndGenerateManager : StrixBehaviour
             Destroy(this);
         }
     }
+    private void Update()
+    {
+        Debug.Log(ScoreManager.instance);
+    }
+
     public void CollideNotice(GameObject hitObj, GameObject selfObj, CollideManager.TypeOfPiece type)
     {
+        if (!isLocal)
+        {
+            return;
+        }
         if(hitObj == hitObj2 && selfObj == hitObj1)
         {
             genePos = (hitObj1.transform.position + hitObj2.transform.position) / 2f;
-            RpcToAll(nameof(GenerateNextPiece), type);
-            //GenerateNextPiece(type);
+            //RpcToAll(nameof(GenerateNextPiece), type);
+            GenerateNextPiece(type);
         }
         else
         {
@@ -42,55 +57,63 @@ public class CollideAndGenerateManager : StrixBehaviour
         }
     }
 
+   // [StrixRpc]
     void GenerateNextPiece(CollideManager.TypeOfPiece oldType)
     {
+        Debug.Log("GenerateNextPiece");
         switch (oldType)
         {
             case CollideManager.TypeOfPiece.Type1:
-                ScoreManager.instance.AddScore(scoreAmount[0]);
-                genePiece = DropController.instance.Pieces[1];
+                GameObject.Find("ScoreManager").GetComponent<ScoreManager>().AddScore(scoreAmount[0]);
+                //ScoreManager.instance.AddScore(scoreAmount[0]);
+                genePiece = Pieces[1];
                 break;
             case CollideManager.TypeOfPiece.Type2:
-                ScoreManager.instance.AddScore(scoreAmount[1]);
-                genePiece = DropController.instance.Pieces[2];
+                GameObject.Find("ScoreManager").GetComponent<ScoreManager>().AddScore(scoreAmount[1]);
+                //ScoreManager.instance.AddScore(scoreAmount[1]);
+                genePiece = Pieces[2];
                 break;
             case CollideManager.TypeOfPiece.Type3:
-                ScoreManager.instance.AddScore(scoreAmount[2]);
-                genePiece = DropController.instance.Pieces[3];
+                GameObject.Find("ScoreManager").GetComponent<ScoreManager>().AddScore(scoreAmount[1]);
+                //ScoreManager.instance.AddScore(scoreAmount[2]);
+                genePiece = Pieces[3];
                 break;
             case CollideManager.TypeOfPiece.Type4:
                 ScoreManager.instance.AddScore(scoreAmount[3]);
-                genePiece = DropController.instance.Pieces[4];
+                genePiece = Pieces[4];
                 break;
             case CollideManager.TypeOfPiece.Type5:
                 ScoreManager.instance.AddScore(scoreAmount[4]);
-                genePiece = DropController.instance.Pieces[5];
+                genePiece = Pieces[5];
                 break;
             case CollideManager.TypeOfPiece.Type6:
                 ScoreManager.instance.AddScore(scoreAmount[5]);
-                genePiece = DropController.instance.Pieces[6];
+                genePiece = Pieces[6];
                 break;
             case CollideManager.TypeOfPiece.Type7:
                 ScoreManager.instance.AddScore(scoreAmount[6]);
-                genePiece = DropController.instance.Pieces[7];
+                genePiece = Pieces[7];
                 break;
             case CollideManager.TypeOfPiece.Type8:
                 ScoreManager.instance.AddScore(scoreAmount[7]);
-                genePiece = DropController.instance.Pieces[8];
+                genePiece = Pieces[8];
                 break;
             case CollideManager.TypeOfPiece.Type9:
                 ScoreManager.instance.AddScore(scoreAmount[8]);
-                genePiece = DropController.instance.Pieces[9];
+                genePiece = Pieces[9];
                 break;
             case CollideManager.TypeOfPiece.Type10:
                 ScoreManager.instance.AddScore(scoreAmount[9]);
-                genePiece = DropController.instance.Pieces[10];
+                genePiece = Pieces[10];
                 break;
             case CollideManager.TypeOfPiece.Type11:
                 ScoreManager.instance.AddScore(scoreAmount[10]);
-                Debug.Log("Delete");
+                ScoreManager.instance.AddScore(scoreAmount[10]);
                 break;
         }
-        Instantiate(genePiece, genePos, Quaternion.identity).GetComponent<Rigidbody2D>().simulated = true;
+        Debug.Log("NextPiece");
+        SEController.Instance.PlaySe(3);
+        isSimulated = true;
+        Instantiate(genePiece, genePos, Quaternion.identity).GetComponent<Rigidbody2D>().simulated = isSimulated;
     }
 }

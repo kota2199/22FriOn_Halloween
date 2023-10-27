@@ -40,7 +40,6 @@ public class StrixEnterRoom : StrixBehaviour {
         {
             return;
         }
-        Debug.Log(roomName);
     }
 
     public void EnterRoom() {
@@ -67,26 +66,5 @@ public class StrixEnterRoom : StrixBehaviour {
         }, args => {
             onRoomEnterFailed.Invoke();
         });
-    }
-
-    public void ChangeRoom()
-    {
-        if (!isLocal)
-        {
-            return;
-        }
-        if (roomNameField.value == 0)
-        {
-            roomName = "Room_A";
-        }
-        else if (roomNameField.value == 1)
-        {
-            roomName = "Room_B";
-        }
-        else if (roomNameField.value == 2)
-        {
-            roomName = "Room_C";
-        }
-        Debug.Log(roomName);
     }
 }  
