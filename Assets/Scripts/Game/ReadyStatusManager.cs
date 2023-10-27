@@ -39,6 +39,7 @@ public class ReadyStatusManager : StrixBehaviour
     }
     public void OnReady()
     {
+        SEController.Instance.PlaySe(0);
         strixNetwork.SetRoomMember
                (
                    strixNetwork.selfRoomMember.GetPrimaryKey(),
@@ -66,6 +67,10 @@ public class ReadyStatusManager : StrixBehaviour
     {
         if (CheckAllRoomMembersState() && strixNetwork.room.GetMemberCount() > 1)
         {
+            if (!isLocal)
+            {
+                return;
+            }
             CallCountDown();
         }
     }
@@ -86,6 +91,9 @@ public class ReadyStatusManager : StrixBehaviour
         countDownText.text = "Go!";
         yield return new WaitForSeconds(1);
         player.GetComponent<DropController>().GenerateForWait();
+        player.GetComponent<DropController>().RoomJoined();
+        GameObject.FindWithTag("Manager").GetComponent<TimeManager>().CountStart();
+        Debug.Log("Generate");
         waitingUi.SetActive(false);
     }
     public static bool CheckAllRoomMembersState()

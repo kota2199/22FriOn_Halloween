@@ -22,13 +22,17 @@ public class ScoreManager : StrixBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
     // Start is called before the first frame update
     void Start()
     {
-        scoreText.text = "Score : \n" + totalScore;
+        if (!isLocal)
+        {
+            return;
+        }
+        scoreText.text = "Score :" + totalScore;
     }
 
     // Update is called once per frame
@@ -39,7 +43,15 @@ public class ScoreManager : StrixBehaviour
 
     public void AddScore(int score)
     {
-        totalScore += score;
-        scoreText.text = "Score : \n" + totalScore;
+        Debug.Log("CalledS");
+        RpcToAll(nameof(AddScoreEveryOne), score);
+    }
+
+    [StrixRpc]
+    public void AddScoreEveryOne(int addScore)
+    {
+        Debug.Log("AddScore");
+        totalScore += addScore;
+        scoreText.text = "Score" + totalScore;
     }
 }

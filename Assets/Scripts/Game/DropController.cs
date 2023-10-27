@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using SoftGear.Strix.Unity.Runtime;
 
 public class DropController : StrixBehaviour
@@ -11,6 +12,8 @@ public class DropController : StrixBehaviour
 
     public GameObject[] Pieces;
 
+    public GameObject[] PiecesForAfterDrop;
+
     public GameObject SetPiece;
 
     [SerializeField]
@@ -18,6 +21,17 @@ public class DropController : StrixBehaviour
 
     bool dropped = true;
 
+    [SerializeField]
+    Text playerNameText;
+
+    [StrixSyncField]
+    string playerName;
+
+    StrixNetwork strixNetwork;
+    private void Start()
+    {
+        strixNetwork = StrixNetwork.instance;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -25,107 +39,86 @@ public class DropController : StrixBehaviour
         {
             return;
         }
-        float currentPos = transform.position.x;
-        if (isMovingRight && currentPos < 3.5f && !dropped)
-        {
-            transform.position += new Vector3(2f, 0, 0) * Time.deltaTime;
-        }
-        else if(isMovingLeft && currentPos > -3 && !dropped)
-        {
-            transform.position -= new Vector3(2f, 0, 0) * Time.deltaTime;
-        }
-    }
 
-    public void PushRightButton()
-    {
-        if (!isLocal)
+        Debug.Log(SetPiece);
+        if (SetPiece != null)
         {
-            return;
+            SetPiece.transform.position = transform.position;
         }
-        isMovingRight = true;
     }
-
-    public void ReleaseRightButton()
+    public void RoomJoined()
     {
-        if (!isLocal)
-        {
-            return;
-        }
-        isMovingRight = false;
+        RpcToAll(nameof(Displayname));
     }
-    public void PushLeftButton()
+    [StrixRpc]
+    public void Displayname()
     {
-        if (!isLocal)
-        {
-            return;
-        }
-        isMovingLeft = true;
-    }
-
-    public void ReleaseLeftButton()
-    {
-        if (!isLocal)
-        {
-            return;
-        }
-        isMovingLeft = false;
+        playerName = this.gameObject.GetComponent<StrixReplicator>().roomMember.GetName();
+        playerNameText.text = playerName;
     }
     public void GenerateForWait()
     {
-        if (!isLocal)
-        {
-            return;
-        }
+        //RpcToAll(nameof(GeneratePiece));
+        GeneratePiece();
         Debug.Log("GeneratePiece");
-        RpcToAll(nameof(GeneratePiece));
+        dropButton.SetActive(true);
     }
-    [StrixRpc]
+    //[StrixRpc]
     public void GeneratePiece()
     {
         Debug.Log("Instantiate");
         SetPiece = Instantiate(PieceSet(), transform.position, Quaternion.identity);
-        dropped = false;
-        if (!isLocal)
-        {
-            return;
-        }
-
-        Debug.Log("SetParent");
-        SetPiece.transform.SetParent(gameObject.transform);
-        dropButton.SetActive(true);
     }
     private GameObject PieceSet()
     {
+        Debug.Log("PieceSet");
+        int randomeNum = Random.Range(0, 3);
+        GameObject piece = Pieces[randomeNum];
+        return piece;
         if (!isLocal)
         {
             return null;
         }
-        Debug.Log("PieceSet");
-        int randomeNum = Random.Range(0, 5);
-        GameObject piece = Pieces[randomeNum];
-        return piece;
     }
     public void DropPiece()
     {
-        Debug.Log("DropPiece");
-        RpcToAll(nameof(Drop));
-        if (!isLocal)
+        if(SetPiece != null)
         {
-            return;
+            SEController.Instance.PlaySe(2);
+            Debug.Log("DropPiece");
+            Vector3 dropPos = new Vector3(SetPiece.transform.position.x, SetPiece.transform.position.y, SetPiece.transform.position.z);
+            CollideManager.TypeOfPiece type = SetPiece.GetComponent<CollideManager>().typeOfPiece;
+
+            switch (type)
+            {
+                case CollideManager.TypeOfPiece.Type1:
+                    Debug.Log("Type1");
+                    RpcToRoomOwner(nameof(Drop), 0, dropPos);
+                    break;
+                case CollideManager.TypeOfPiece.Type2:
+                    Debug.Log("Type2");
+                    //ScoreManager.instance.AddScore(scoreAmount[1]);
+                    RpcToRoomOwner(nameof(Drop), 1, dropPos);
+                    break;
+                case CollideManager.TypeOfPiece.Type3:
+                    Debug.Log("Type3");
+                    //ScoreManager.instance.AddScore(scoreAmount[2]);
+                    RpcToRoomOwner(nameof(Drop), 2, dropPos);
+                    break;
+            }
+            Invoke("GenerateForWait", 3f);
+            Destroy(SetPiece);
         }
     }
 
     [StrixRpc]
-    public void Drop()
+    public void Drop(int pieceForRegene, Vector3 PosForRegene)
     {
-        if (!isLocal)
-        {
-            return;
-        }
         Debug.Log("Drop");
-        SetPiece.GetComponent<CollideManager>().SimulateOn();
-        SetPiece.transform.parent = null;
+        GameObject droppedObject = Instantiate(PiecesForAfterDrop[pieceForRegene], PosForRegene, Quaternion.identity);
+        droppedObject.GetComponent<CollideManager>().Simulate();
+        Debug.Log("Dropped");
         dropped = true;
-        Invoke("GenerateForWait", 3f);
+        //Invoke("GenerateForWait", 3f);
     }
 }
