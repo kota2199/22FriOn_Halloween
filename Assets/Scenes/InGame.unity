@@ -705,7 +705,7 @@ MonoBehaviour:
   isPlay: 0
   time: 300
   timerText: {fileID: 1648986805}
-  gameOverUi: {fileID: 0}
+  gameOverUi: {fileID: 1635737089}
 --- !u!1 &336985713
 GameObject:
   m_ObjectHideFlags: 0
@@ -2367,7 +2367,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ac38e9a0d2df74946b35764646e32f95, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 67868c0db8f5fee4b84a9c62b8f73582, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4713,7 +4713,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1997122445759743685, guid: 617e2ba6a8559a44fa4096e248c724a1, type: 3}
       propertyPath: objectType
-      value: 105
+      value: 524294
+      objectReference: {fileID: 0}
+    - target: {fileID: 5233392071359698694, guid: 617e2ba6a8559a44fa4096e248c724a1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5305787304600490181, guid: 617e2ba6a8559a44fa4096e248c724a1, type: 3}
       propertyPath: m_Pivot.x
@@ -4795,19 +4799,28 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5711093821384009642, guid: 617e2ba6a8559a44fa4096e248c724a1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7371196221601688829, guid: 617e2ba6a8559a44fa4096e248c724a1, type: 3}
       propertyPath: m_Name
       value: GameOverCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 7371196221601688829, guid: 617e2ba6a8559a44fa4096e248c724a1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 617e2ba6a8559a44fa4096e248c724a1, type: 3}
+--- !u!1 &1635737089 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7371196221601688829, guid: 617e2ba6a8559a44fa4096e248c724a1, type: 3}
+  m_PrefabInstance: {fileID: 1635737088}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1638456890
 GameObject:
   m_ObjectHideFlags: 0
@@ -6019,6 +6032,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2878095918141597118, guid: 4cdc092255b9cd14b88005b0c3c8e726, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4fb75455157b9384e872f013afdc856e, type: 3}
     - target: {fileID: 3191971249782017787, guid: 4cdc092255b9cd14b88005b0c3c8e726, type: 3}
       propertyPath: dropButton
       value: 
@@ -6030,6 +6047,30 @@ PrefabInstance:
     - target: {fileID: 4385923989917455257, guid: 4cdc092255b9cd14b88005b0c3c8e726, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5588183854783134260, guid: 4cdc092255b9cd14b88005b0c3c8e726, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 5588183854783134260, guid: 4cdc092255b9cd14b88005b0c3c8e726, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 5588183854783134260, guid: 4cdc092255b9cd14b88005b0c3c8e726, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 5588183854783134260, guid: 4cdc092255b9cd14b88005b0c3c8e726, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.184
+      objectReference: {fileID: 0}
+    - target: {fileID: 5588183854783134260, guid: 4cdc092255b9cd14b88005b0c3c8e726, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6351107063202392218, guid: 4cdc092255b9cd14b88005b0c3c8e726, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.413
       objectReference: {fileID: 0}
     - target: {fileID: 7367354655639562561, guid: 4cdc092255b9cd14b88005b0c3c8e726, type: 3}
       propertyPath: m_LocalPosition.x

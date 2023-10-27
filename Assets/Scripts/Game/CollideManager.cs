@@ -41,7 +41,7 @@ public class CollideManager : StrixBehaviour
         if (collision.gameObject.tag == "GameOver")
         {
             Debug.Log("GameOver");
-            Instantiate(gameOverCanvas, transform.position, Quaternion.identity);
+            gameOverCanvas.SetActive(true);
         }
     }
     [StrixRpc]
