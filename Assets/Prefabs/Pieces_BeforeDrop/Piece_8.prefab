@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.42, y: 0.42, z: 0.42}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -130,7 +130,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSimulated: 0
   typeOfPiece: 7
-  gameOverCanvas: {fileID: 7371196221601688829, guid: 617e2ba6a8559a44fa4096e248c724a1, type: 3}
 --- !u!114 &-3724697124299526815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,7 +145,7 @@ MonoBehaviour:
   strixBehaviours:
   - {fileID: 1397628087889164038}
   - {fileID: -593018006933727702}
-  objectType: 53
+  objectType: 18
   sendRate: 30
   syncDestroy: 1
   networkInstanceId: -1

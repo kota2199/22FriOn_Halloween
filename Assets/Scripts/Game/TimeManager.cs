@@ -20,6 +20,8 @@ public class TimeManager : StrixBehaviour
     [SerializeField]
     GameObject gameOverUi;
 
+    bool isEnded = false;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -49,7 +51,12 @@ public class TimeManager : StrixBehaviour
         {
             isPlay = false;
             time = 0;
-            gameOverUi.SetActive(true);
+            if (isEnded)
+            {
+                Debug.Log("timeup");
+                gameOverUi.GetComponent<ResultUICanvas>().SetActiveResultUICanvas(true, CollideAndGenerateManager.instance.archiveValue, 1, true);
+                isEnded = false;
+            }
         }
 
     }

@@ -22,6 +22,8 @@ public class CollideAndGenerateManager : StrixBehaviour
     [StrixSyncField]
     public bool isSimulated = false;
 
+    public int archiveValue = 0;
+
     void Awake()
     {
         if (instance == null)
@@ -71,39 +73,77 @@ public class CollideAndGenerateManager : StrixBehaviour
             case CollideManager.TypeOfPiece.Type2:
                 GameObject.Find("ScoreManager").GetComponent<ScoreManager>().AddScore(scoreAmount[1]);
                 //ScoreManager.instance.AddScore(scoreAmount[1]);
+                if(archiveValue < 1)
+                {
+                    archiveValue = 1;
+                }
                 genePiece = Pieces[2];
                 break;
             case CollideManager.TypeOfPiece.Type3:
                 GameObject.Find("ScoreManager").GetComponent<ScoreManager>().AddScore(scoreAmount[1]);
                 //ScoreManager.instance.AddScore(scoreAmount[2]);
+                if (archiveValue < 2)
+                {
+                    archiveValue = 2;
+                }
                 genePiece = Pieces[3];
                 break;
             case CollideManager.TypeOfPiece.Type4:
                 ScoreManager.instance.AddScore(scoreAmount[3]);
+                if (archiveValue < 3)
+                {
+                    archiveValue = 3;
+                }
                 genePiece = Pieces[4];
                 break;
             case CollideManager.TypeOfPiece.Type5:
                 ScoreManager.instance.AddScore(scoreAmount[4]);
+                if (archiveValue < 4)
+                {
+                    archiveValue = 4;
+                }
                 genePiece = Pieces[5];
                 break;
             case CollideManager.TypeOfPiece.Type6:
                 ScoreManager.instance.AddScore(scoreAmount[5]);
+                if (archiveValue < 5)
+                {
+                    archiveValue = 5;
+                }
                 genePiece = Pieces[6];
                 break;
             case CollideManager.TypeOfPiece.Type7:
                 ScoreManager.instance.AddScore(scoreAmount[6]);
+
+                if (archiveValue < 6)
+                {
+                    archiveValue = 6;
+                }
                 genePiece = Pieces[7];
                 break;
             case CollideManager.TypeOfPiece.Type8:
                 ScoreManager.instance.AddScore(scoreAmount[7]);
+                if (archiveValue < 7)
+                {
+                    archiveValue = 7;
+                }
                 genePiece = Pieces[8];
                 break;
             case CollideManager.TypeOfPiece.Type9:
                 ScoreManager.instance.AddScore(scoreAmount[8]);
+                if (archiveValue < 8)
+                {
+                    archiveValue = 8;
+                }
                 genePiece = Pieces[9];
                 break;
             case CollideManager.TypeOfPiece.Type10:
                 ScoreManager.instance.AddScore(scoreAmount[9]);
+
+                if (archiveValue < 9)
+                {
+                    archiveValue = 8;
+                }
                 genePiece = Pieces[10];
                 break;
             case CollideManager.TypeOfPiece.Type11:

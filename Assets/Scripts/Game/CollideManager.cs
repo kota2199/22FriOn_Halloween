@@ -17,9 +17,7 @@ public class CollideManager : StrixBehaviour
 
     GameObject manager;
 
-    [SerializeField]
-    GameObject gameOverCanvas;
-
+    bool isEnded = false;
     private void Start()
     {
         manager = GameObject.FindWithTag("Manager");
@@ -36,12 +34,13 @@ public class CollideManager : StrixBehaviour
             RpcToAll(nameof(DestroyPiece));
         }
     }
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "GameOver")
         {
-            Debug.Log("GameOver");
-            gameOverCanvas.SetActive(true);
+            Debug.Log("collide");
+            RpcToAll(nameof(GameEnd));
         }
     }
     [StrixRpc]
@@ -49,18 +48,21 @@ public class CollideManager : StrixBehaviour
     {
         Destroy(gameObject);
     }
-
-    //Turn on Rigidbody2D's simulated.
-    /*public void SimulateOn()
-    {
-        RpcToRoomOwner(nameof(Simulate));
-    }
-    */
     [StrixRpc]
     public void Simulate()
     {
         Debug.Log("Owner");
         isSimulated = true;
         GetComponent<Rigidbody2D>().simulated = isSimulated;
+    }
+    [StrixRpc]
+    public void GameEnd()
+    {
+        Debug.Log("GameOver");
+        if (!isEnded)
+        {
+            GameObject.Find("ReslutUICanvas").GetComponent<ResultUICanvas>().SetActiveResultUICanvas(true, ScoreManager.instance.totalScore, CollideAndGenerateManager.instance.archiveValue, false);
+            isEnded = true;
+        }
     }
 }

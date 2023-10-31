@@ -20,14 +20,14 @@ public class ResultUICanvas : MonoBehaviour
 
     [SerializeField] string[] virtualBGUrls =
     {
-        "https://www.google.co.jp",
-        "https://www.youtube.com",
-        "https://fast.com/ja/",
-        "https://www.yahoo.co.jp/",
-        "https://www.google.co.jp",
-        "https://www.youtube.com",
-        "https://fast.com/ja/",
-        "https://www.yahoo.co.jp/",
+        "https://fliday-halloween-zasiki.netlify.app/",
+        "https://fliday-halloween-tyoutin.netlify.app/",
+        "https://fliday-halloween-rokuro.netlify.app/",
+        "https://fliday-halloween-zasiki.netlify.app/",
+        "https://fliday-halloween-tyoutin.netlify.app/",
+        "https://fliday-halloween-rokuro.netlify.app/",
+        "https://fliday-halloween-amabie.netlify.app/",
+        "https://fliday-halloween-tengu.netlify.app/",
     };
 
     [SerializeField] Text flavourText;

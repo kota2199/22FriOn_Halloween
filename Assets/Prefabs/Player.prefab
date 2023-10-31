@@ -341,7 +341,7 @@ MonoBehaviour:
   - {fileID: 3191971249782017787}
   - {fileID: 2047284354786695948}
   - {fileID: 4098540743779754831}
-  objectType: 5
+  objectType: 7
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1
