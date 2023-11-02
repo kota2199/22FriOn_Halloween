@@ -23,6 +23,9 @@ public class ReadyStatusManager : StrixBehaviour
 
     [SerializeField]
     GameObject player;
+
+    [SerializeField]
+    GameObject backPanel;
     // Start is called before the first frame update
     void Start()
     {
@@ -90,6 +93,11 @@ public class ReadyStatusManager : StrixBehaviour
         yield return new WaitForSeconds(1);
         countDownText.text = "Go!";
         yield return new WaitForSeconds(1);
+
+        Color currentColor = backPanel.GetComponent<Image>().color;
+        currentColor.a = 0f;
+        backPanel.GetComponent<Image>().color = currentColor;
+
         player.GetComponent<DropController>().GenerateForWait();
         player.GetComponent<DropController>().RoomJoined();
         GameObject.FindWithTag("Manager").GetComponent<TimeManager>().CountStart();

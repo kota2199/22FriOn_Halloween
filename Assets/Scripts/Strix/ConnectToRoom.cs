@@ -40,13 +40,6 @@ public class ConnectToRoom : StrixBehaviour
             },
             errorEventHandler: connectError => Debug.LogError("Connection failed. Reason: " + connectError.cause)
         );
-        /*strixNetwork.ConnectMasterServer("32ae743d6ca4d45daf916f97.game.strixcloud.net" ,9122,
-    connectEventHandler: _ => 
-    {
-        Debug.Log("Connection established.");
-    },
-    errorEventHandler: connectError => Debug.LogError("Connection failed. Reason: " + connectError.cause));
-        */
     }
 
     public void ChangeRoom()

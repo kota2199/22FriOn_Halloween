@@ -12,7 +12,7 @@ public class TimeManager : StrixBehaviour
     public bool isPlay = false;
 
     [StrixSyncField]
-    public float time = 300;
+    public float time = 200;
 
     [SerializeField]
     Text timerText;
@@ -51,11 +51,14 @@ public class TimeManager : StrixBehaviour
         {
             isPlay = false;
             time = 0;
-            if (isEnded)
+            if (!isEnded)
             {
                 Debug.Log("timeup");
-                gameOverUi.GetComponent<ResultUICanvas>().SetActiveResultUICanvas(true, CollideAndGenerateManager.instance.archiveValue, 1, true);
-                isEnded = false;
+                int score = ScoreManager.instance.totalScore;
+                int yokaiIndex = CollideAndGenerateManager.instance.archiveValue;
+                Debug.Log("TimeUp");
+                gameOverUi.GetComponent<ResultUICanvas>().SetActiveResultUICanvas(true, score, yokaiIndex, true);
+                isEnded = true;
             }
         }
 

@@ -35,12 +35,6 @@ public class ScoreManager : StrixBehaviour
         scoreText.text = "Score :" + totalScore;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void AddScore(int score)
     {
         Debug.Log("CalledS");
@@ -52,6 +46,6 @@ public class ScoreManager : StrixBehaviour
     {
         Debug.Log("AddScore");
         totalScore += addScore;
-        scoreText.text = "Score" + totalScore;
+        scoreText.text = "Score : " + totalScore;
     }
 }

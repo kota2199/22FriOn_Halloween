@@ -39,8 +39,6 @@ public class DropController : StrixBehaviour
         {
             return;
         }
-
-        Debug.Log(SetPiece);
         if (SetPiece != null)
         {
             SetPiece.transform.position = transform.position;

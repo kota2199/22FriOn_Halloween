@@ -25,12 +25,18 @@ public class CollideManager : StrixBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        int selfId = gameObject.GetInstanceID();
+        int collisionId = collision.gameObject.GetInstanceID();
+
         if (collision.gameObject.GetComponent<CollideManager>()
             && collision.gameObject.GetComponent<CollideManager>().typeOfPiece == typeOfPiece)
         {
-            manager.GetComponent<CollideAndGenerateManager>().CollideNotice
-                (this.gameObject, collision.gameObject, typeOfPiece);
-            //Destroy(this.gameObject);
+            if (selfId > collisionId)
+            {
+                manager.GetComponent<CollideAndGenerateManager>().CollideNotice
+                    (this.gameObject, collision.gameObject, typeOfPiece);
+            }
+            Destroy(this.gameObject);
             RpcToAll(nameof(DestroyPiece));
         }
     }
@@ -43,6 +49,7 @@ public class CollideManager : StrixBehaviour
             RpcToAll(nameof(GameEnd));
         }
     }
+
     [StrixRpc]
     void DestroyPiece()
     {

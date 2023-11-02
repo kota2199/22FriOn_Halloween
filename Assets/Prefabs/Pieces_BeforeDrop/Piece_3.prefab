@@ -14,8 +14,7 @@ GameObject:
   - component: {fileID: -4374295732211212884}
   - component: {fileID: -9057852194457156043}
   - component: {fileID: -8571499746638604584}
-  - component: {fileID: 7882477047021745074}
-  - component: {fileID: 5363054571437630438}
+  - component: {fileID: 2610970577972543987}
   m_Layer: 0
   m_Name: Piece_3
   m_TagString: Untagged
@@ -102,7 +101,7 @@ Rigidbody2D:
   m_Simulated: 0
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 2
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -115,7 +114,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!114 &-4374295732211212884
 MonoBehaviour:
@@ -131,7 +130,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSimulated: 0
   typeOfPiece: 2
-  gameOverCanvas: {fileID: 7371196221601688829, guid: 617e2ba6a8559a44fa4096e248c724a1, type: 3}
 --- !u!114 &-9057852194457156043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,12 +145,12 @@ MonoBehaviour:
   strixBehaviours:
   - {fileID: -4374295732211212884}
   - {fileID: -8571499746638604584}
-  objectType: 101
+  objectType: 33
   sendRate: 30
   syncDestroy: 1
   networkInstanceId: -1
   InstantiableBy: 0
-  ConnectionClosedBehaviour: 1
+  ConnectionClosedBehaviour: 0
 --- !u!114 &-8571499746638604584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,8 +170,8 @@ MonoBehaviour:
   SyncPeriodMin: 25
   SyncPeriodMax: 200
   PredictionPeriod: 300
---- !u!60 &7882477047021745074
-PolygonCollider2D:
+--- !u!58 &2610970577972543987
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -204,42 +202,6 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 12.8, y: 12.8}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -2.3, y: -6.0499997}
-      - {x: -1.52, y: -5.4}
-      - {x: 2.1299999, y: -5.3199997}
-      - {x: 4.27, y: -5.99}
-      - {x: 5.92, y: -2.99}
-      - {x: 5.5499997, y: 4.38}
-      - {x: 3.62, y: 5.89}
-      - {x: 0.65, y: 6.0299997}
-      - {x: -2.73, y: 3.9099998}
-      - {x: -5.65, y: 0.26999998}
-      - {x: -5.69, y: -3.3}
-      - {x: -4.29, y: -5.79}
-      - {x: -2.45, y: -6.0899997}
-  m_UseDelaunayMesh: 0
---- !u!114 &5363054571437630438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6795330613555886523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6876803ba35184bf9b6a393e33a2f264, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tolerance: 0.44
+  m_Offset: {x: 0.7, y: 0}
+  serializedVersion: 2
+  m_Radius: 5.88

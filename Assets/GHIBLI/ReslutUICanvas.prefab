@@ -58,7 +58,7 @@ Canvas:
   m_GameObject: {fileID: 393203086842060566}
   m_Enabled: 0
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -128,8 +128,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8adfcb988920eb841b6984200fe4a41e, type: 3}
   - {fileID: 21300000, guid: 5f3c4faf989cb924cafab5ae2e7b6785, type: 3}
   - {fileID: 21300000, guid: 7107eb1bd68e3ef44a4c58300dfc8314, type: 3}
-  - {fileID: 21300000, guid: 095fff9a99afefc40ac105d9aa06e380, type: 3}
   - {fileID: 21300000, guid: bc7fb644aac519f48b979d76ec2e4b0a, type: 3}
+  - {fileID: 21300000, guid: 095fff9a99afefc40ac105d9aa06e380, type: 3}
   - {fileID: 21300000, guid: a1066d9149317db4a84430e55bcd04e9, type: 3}
   - {fileID: 21300000, guid: bcde978f10d5f4d428589cf7f3d7df83, type: 3}
   - {fileID: 21300000, guid: 2962d4345cbc14e43a9271a1f199d081, type: 3}
@@ -138,11 +138,11 @@ MonoBehaviour:
   resultScoreText: {fileID: 6701603149357838699}
   resultYokaiNameText: {fileID: 9105889801278240453}
   virtualBGUrls:
-  - https://fliday-halloween-zasiki.netlify.app/
   - https://fliday-halloween-tyoutin.netlify.app/
-  - https://fliday-halloween-rokuro.netlify.app/
-  - https://fliday-halloween-zasiki.netlify.app/
   - https://fliday-halloween-tyoutin.netlify.app/
+  - https://fliday-halloween-tyoutin.netlify.app/
+  - https://fliday-halloween-tyoutin.netlify.app/
+  - https://fliday-halloween-zasiki.netlify.app/
   - https://fliday-halloween-rokuro.netlify.app/
   - https://fliday-halloween-amabie.netlify.app/
   - https://fliday-halloween-tengu.netlify.app/

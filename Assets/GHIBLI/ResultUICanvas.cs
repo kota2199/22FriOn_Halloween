@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ResultUICanvas : MonoBehaviour
 {
     enum YokaiName{};
-    string[] yokaiNames = { "一つ目小僧", "かっぱ", "ぬらりひょん", "座敷わらし", "提灯お化け", "ろくろ首", "アマビエ", "天狗" };
+    string[] yokaiNames = { "一つ目小僧", "かっぱ", "ぬらりひょん", "提灯お化け", "座敷わらし", "ろくろ首", "アマビエ", "天狗" };
 
     [SerializeField] Sprite[] yokaiSprites;
 
@@ -20,11 +20,10 @@ public class ResultUICanvas : MonoBehaviour
 
     [SerializeField] string[] virtualBGUrls =
     {
-        "https://fliday-halloween-zasiki.netlify.app/",
+        "https://fliday-halloween-tyoutin.netlify.app//",
         "https://fliday-halloween-tyoutin.netlify.app/",
-        "https://fliday-halloween-rokuro.netlify.app/",
-        "https://fliday-halloween-zasiki.netlify.app/",
         "https://fliday-halloween-tyoutin.netlify.app/",
+        "https://fliday-halloween-zasiki.netlify.app//",
         "https://fliday-halloween-rokuro.netlify.app/",
         "https://fliday-halloween-amabie.netlify.app/",
         "https://fliday-halloween-tengu.netlify.app/",
