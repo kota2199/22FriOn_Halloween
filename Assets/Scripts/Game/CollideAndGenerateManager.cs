@@ -142,10 +142,6 @@ public class CollideAndGenerateManager : StrixBehaviour
 
             case CollideManager.TypeOfPiece.Type8:
                 GameObject.Find("ScoreManager").GetComponent<ScoreManager>().AddScore(scoreAmount[7]);
-                if (archiveValue <= 7)
-                {
-                    archiveValue = 7;
-                }
                 break;
         }
         Debug.Log("NextPiece");
