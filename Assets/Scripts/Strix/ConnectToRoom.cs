@@ -30,9 +30,9 @@ public class ConnectToRoom : StrixBehaviour
     {
         strixNetwork = StrixNetwork.instance;
 
-        webGLHostUrl = "wss://" + "32ae743d6ca4d45daf916f97.game.strixcloud.net" + ":9122";
+        webGLHostUrl = "wss://" + "host url" + ":9122";
 
-        strixNetwork.applicationId = "3de7734b-7f47-4673-bfb1-5415554765e4";
+        strixNetwork.applicationId = "application id";
 
         strixNetwork.ConnectMasterServer(webGLHostUrl,
             connectEventHandler: _ => {

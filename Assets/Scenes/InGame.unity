@@ -5968,7 +5968,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5950829266648717992, guid: 2586170701fd0e2489578a27e6c5d2e5, type: 3}
       propertyPath: objectType
-      value: 524294
+      value: 524293
       objectReference: {fileID: 0}
     - target: {fileID: 6069301444903996876, guid: 2586170701fd0e2489578a27e6c5d2e5, type: 3}
       propertyPath: timerText
@@ -6045,7 +6045,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8097682066155857495, guid: 4cdc092255b9cd14b88005b0c3c8e726, type: 3}
       propertyPath: objectType
-      value: 524289
+      value: 524290
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
