@@ -101,7 +101,6 @@ public class ReadyStatusManager : StrixBehaviour
         player.GetComponent<DropController>().GenerateForWait();
         player.GetComponent<DropController>().RoomJoined();
         GameObject.FindWithTag("Manager").GetComponent<TimeManager>().CountStart();
-        Debug.Log("Generate");
         waitingUi.SetActive(false);
     }
     public static bool CheckAllRoomMembersState()

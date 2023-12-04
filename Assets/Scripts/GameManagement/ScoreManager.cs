@@ -37,14 +37,12 @@ public class ScoreManager : StrixBehaviour
 
     public void AddScore(int score)
     {
-        Debug.Log("CalledS");
         RpcToAll(nameof(AddScoreEveryOne), score);
     }
 
     [StrixRpc]
     public void AddScoreEveryOne(int addScore)
     {
-        Debug.Log("AddScore");
         totalScore += addScore;
         scoreText.text = "Score : " + totalScore;
     }

@@ -38,42 +38,37 @@ public class CollideAndGenerateManager : StrixBehaviour
             Destroy(this);
         }
     }
-    private void Update()
-    {
-        Debug.Log(ScoreManager.instance);
-    }
 
-    public void CollideNotice(GameObject hitObj, GameObject selfObj, CollideManager.TypeOfPiece type)
+    private void Start()
     {
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+    }
+    public void CollideNotice(GameObject hitObj, GameObject selfObj, CollideManager.TypeOfPiece type)
+    {
         if (!isLocal)
         {
             return;
         }
-        if(hitObj == hitObj2 && selfObj == hitObj1)
-        {
-            //genePos = (hitObj1.transform.position + hitObj2.transform.position) / 2f;
-            //RpcToAll(nameof(GenerateNextPiece), type);
-            //GenerateNextPiece(type);
-        }
-        else
+        /*
+        if(!(hitObj == hitObj2 && selfObj == hitObj1))
         {
             hitObj1 = hitObj;
             hitObj2 = selfObj;
         }
+        */
 
-        genePos = (hitObj1.transform.position + hitObj2.transform.position) / 2f;
+        //genePos = (hitObj1.transform.position + hitObj2.transform.position) / 2f;
+        genePos = (hitObj.transform.position + selfObj.transform.position) / 2f;
         GenerateNextPiece(type);
     }
 
-   // [StrixRpc]
     void GenerateNextPiece(CollideManager.TypeOfPiece oldType)
     {
         Debug.Log("GenerateNextPiece");
         switch (oldType)
         {
             case CollideManager.TypeOfPiece.Type1:
-                GameObject.Find("ScoreManager").GetComponent<ScoreManager>().AddScore(scoreAmount[0]);
+                scoreManager.AddScore(scoreAmount[0]);
                 if (archiveValue <= 1)
                 {
                     archiveValue = 1;
@@ -83,7 +78,7 @@ public class CollideAndGenerateManager : StrixBehaviour
                 break;
 
             case CollideManager.TypeOfPiece.Type2:
-                GameObject.Find("ScoreManager").GetComponent<ScoreManager>().AddScore(scoreAmount[1]);
+                scoreManager.AddScore(scoreAmount[1]);
                 if (archiveValue <= 2)
                 {
                     archiveValue = 2;
@@ -93,7 +88,7 @@ public class CollideAndGenerateManager : StrixBehaviour
                 break;
 
             case CollideManager.TypeOfPiece.Type3:
-                GameObject.Find("ScoreManager").GetComponent<ScoreManager>().AddScore(scoreAmount[2]);
+                scoreManager.AddScore(scoreAmount[2]);
                 if (archiveValue <= 3)
                 {
                     archiveValue = 3;
@@ -103,7 +98,7 @@ public class CollideAndGenerateManager : StrixBehaviour
                 break;
 
             case CollideManager.TypeOfPiece.Type4:
-                GameObject.Find("ScoreManager").GetComponent<ScoreManager>().AddScore(scoreAmount[3]);
+                scoreManager.AddScore(scoreAmount[3]);
                 if (archiveValue <= 4)
                 {
                     archiveValue = 4;
@@ -112,7 +107,7 @@ public class CollideAndGenerateManager : StrixBehaviour
                 Generate();
                 break;
             case CollideManager.TypeOfPiece.Type5:
-                GameObject.Find("ScoreManager").GetComponent<ScoreManager>().AddScore(scoreAmount[4]);
+                scoreManager.AddScore(scoreAmount[4]);
                 if (archiveValue <= 5)
                 {
                     archiveValue = 5;
@@ -121,7 +116,7 @@ public class CollideAndGenerateManager : StrixBehaviour
                 Generate();
                 break;
             case CollideManager.TypeOfPiece.Type6:
-                GameObject.Find("ScoreManager").GetComponent<ScoreManager>().AddScore(scoreAmount[5]);
+                scoreManager.AddScore(scoreAmount[5]);
                 if (archiveValue <= 6)
                 {
                     archiveValue = 6;
@@ -130,7 +125,7 @@ public class CollideAndGenerateManager : StrixBehaviour
                 Generate();
                 break;
             case CollideManager.TypeOfPiece.Type7:
-                GameObject.Find("ScoreManager").GetComponent<ScoreManager>().AddScore(scoreAmount[6]);
+                scoreManager.AddScore(scoreAmount[6]);
 
                 if (archiveValue <= 7)
                 {
@@ -141,10 +136,9 @@ public class CollideAndGenerateManager : StrixBehaviour
                 break;
 
             case CollideManager.TypeOfPiece.Type8:
-                GameObject.Find("ScoreManager").GetComponent<ScoreManager>().AddScore(scoreAmount[7]);
+                scoreManager.AddScore(scoreAmount[7]);
                 break;
         }
-        Debug.Log("NextPiece");
         SEController.Instance.PlaySe(3);
         isSimulated = true;
     }

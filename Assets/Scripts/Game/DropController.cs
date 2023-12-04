@@ -56,20 +56,16 @@ public class DropController : StrixBehaviour
     }
     public void GenerateForWait()
     {
-        //RpcToAll(nameof(GeneratePiece));
         GeneratePiece();
-        Debug.Log("GeneratePiece");
         dropButton.SetActive(true);
     }
-    //[StrixRpc]
+
     public void GeneratePiece()
     {
-        Debug.Log("Instantiate");
         SetPiece = Instantiate(PieceSet(), transform.position, Quaternion.identity);
     }
     private GameObject PieceSet()
     {
-        Debug.Log("PieceSet");
         int randomeNum = Random.Range(0, 3);
         GameObject piece = Pieces[randomeNum];
         return piece;
@@ -83,24 +79,18 @@ public class DropController : StrixBehaviour
         if(SetPiece != null)
         {
             SEController.Instance.PlaySe(2);
-            Debug.Log("DropPiece");
             Vector3 dropPos = new Vector3(SetPiece.transform.position.x, SetPiece.transform.position.y, SetPiece.transform.position.z);
             CollideManager.TypeOfPiece type = SetPiece.GetComponent<CollideManager>().typeOfPiece;
 
             switch (type)
             {
                 case CollideManager.TypeOfPiece.Type1:
-                    Debug.Log("Type1");
                     RpcToRoomOwner(nameof(Drop), 0, dropPos);
                     break;
                 case CollideManager.TypeOfPiece.Type2:
-                    Debug.Log("Type2");
-                    //ScoreManager.instance.AddScore(scoreAmount[1]);
                     RpcToRoomOwner(nameof(Drop), 1, dropPos);
                     break;
                 case CollideManager.TypeOfPiece.Type3:
-                    Debug.Log("Type3");
-                    //ScoreManager.instance.AddScore(scoreAmount[2]);
                     RpcToRoomOwner(nameof(Drop), 2, dropPos);
                     break;
             }
@@ -112,11 +102,9 @@ public class DropController : StrixBehaviour
     [StrixRpc]
     public void Drop(int pieceForRegene, Vector3 PosForRegene)
     {
-        Debug.Log("Drop");
         GameObject droppedObject = Instantiate(PiecesForAfterDrop[pieceForRegene], PosForRegene, Quaternion.identity);
         droppedObject.GetComponent<CollideManager>().Simulate();
-        Debug.Log("Dropped");
         dropped = true;
-        //Invoke("GenerateForWait", 3f);
+        dropped = true;
     }
 }

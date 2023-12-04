@@ -21,8 +21,8 @@ public class CollideManager : StrixBehaviour
     private void Start()
     {
         manager = GameObject.FindWithTag("Manager");
-        Debug.Log(manager);
     }
+    //接触した二つのピースのうち、IDが小さいほうに次のピースを生成する処理を行わせる。
     private void OnCollisionEnter2D(Collision2D collision)
     {
         int selfId = gameObject.GetInstanceID();
@@ -41,11 +41,11 @@ public class CollideManager : StrixBehaviour
         }
     }
     
+    //GameOverタグを持つオブジェクトと接触したらゲームオーバー
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "GameOver")
         {
-            Debug.Log("collide");
             RpcToAll(nameof(GameEnd));
         }
     }
@@ -58,14 +58,12 @@ public class CollideManager : StrixBehaviour
     [StrixRpc]
     public void Simulate()
     {
-        Debug.Log("Owner");
         isSimulated = true;
         GetComponent<Rigidbody2D>().simulated = isSimulated;
     }
     [StrixRpc]
     public void GameEnd()
     {
-        Debug.Log("GameOver");
         if (!isEnded)
         {
             GameObject.Find("ReslutUICanvas").GetComponent<ResultUICanvas>().SetActiveResultUICanvas(true, ScoreManager.instance.totalScore, CollideAndGenerateManager.instance.archiveValue, false);

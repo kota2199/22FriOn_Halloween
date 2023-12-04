@@ -145,7 +145,7 @@ MonoBehaviour:
   strixBehaviours:
   - {fileID: -4240889281743963864}
   - {fileID: -3784125999570824452}
-  objectType: 6
+  objectType: 9
   sendRate: 30
   syncDestroy: 1
   networkInstanceId: -1
