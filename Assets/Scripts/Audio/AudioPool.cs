@@ -5,12 +5,12 @@ using UnityEngine;
 public class AudioPool : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _audioPrefab;
+    private GameObject audioPrefab;
 
     [SerializeField]
-    private int _poolSize = 20;
+    private int poolSize = 20;
 
-    List<AudioSource> _audioPool;
+    List<AudioSource> audioPool;
 
     private static AudioPool Instance;
 
@@ -23,33 +23,33 @@ public class AudioPool : MonoBehaviour
         }
         else Destroy(gameObject);
 
-        _audioPool = new();
+        audioPool = new();
 
         //ç≈èâÇ…ê∂ê¨Ç∑ÇÈ
-        for (int i = 0; i < _poolSize; i++)
+        for (int i = 0; i < poolSize; i++)
         {
-            GameObject obj = Instantiate(_audioPrefab, transform);
+            GameObject obj = Instantiate(audioPrefab, transform);
             obj.SetActive(false);
-            _audioPool.Add(obj.GetComponent<AudioSource>());
+            audioPool.Add(obj.GetComponent<AudioSource>());
         }
     }
 
     public AudioSource UseAudioSource()
     {
-        for (int i = 0; i < _poolSize; i++)
+        for (int i = 0; i < poolSize; i++)
         {
-            if (!_audioPool[i].isActiveAndEnabled)
+            if (!audioPool[i].isActiveAndEnabled)
             {
-                _audioPool[i].gameObject.SetActive(true);
-                return _audioPool[i];
+                audioPool[i].gameObject.SetActive(true);
+                return audioPool[i];
             }
         }
 
         //Ç»Ç¢èÍçáÇÕêVÇµÇ≠çÏê¨Ç∑ÇÈ
-        _poolSize++;
-        GameObject obj = Instantiate(_audioPrefab, transform);
+        poolSize++;
+        GameObject obj = Instantiate(audioPrefab, transform);
         AudioSource sourse = obj.GetComponent<AudioSource>();
-        _audioPool.Add(sourse);
+        audioPool.Add(sourse);
         return sourse;
     }
 }
