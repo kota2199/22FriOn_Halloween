@@ -11,21 +11,21 @@ using System.Linq;
 public class ReadyStatusManager : StrixBehaviour
 {
     [SerializeField]
-    GameObject readyUi, countDownUi, waitingUi;
+    private GameObject readyUi, countDownUi, waitingUi;
 
     [SerializeField]
-    Text countDownText;
+    private Text countDownText;
 
-    StrixNetwork strixNetwork;
-
-    [SerializeField]
-    Button readyButton;
+    private StrixNetwork strixNetwork;
 
     [SerializeField]
-    GameObject player;
+    private Button readyButton;
 
     [SerializeField]
-    GameObject backPanel;
+    private GameObject player;
+
+    [SerializeField]
+    private GameObject backPanel;
     // Start is called before the first frame update
     void Start()
     {
@@ -98,8 +98,9 @@ public class ReadyStatusManager : StrixBehaviour
         currentColor.a = 0f;
         backPanel.GetComponent<Image>().color = currentColor;
 
-        player.GetComponent<DropController>().GenerateForWait();
-        player.GetComponent<DropController>().RoomJoined();
+        DropController dropController = player.GetComponent<DropController>();
+        dropController.RoomJoined();
+        //RpcToAll(nameof(dropController.GeneratePiece));
         GameObject.FindWithTag("Manager").GetComponent<TimeManager>().CountStart();
         waitingUi.SetActive(false);
     }

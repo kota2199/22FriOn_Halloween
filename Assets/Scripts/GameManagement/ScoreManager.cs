@@ -13,7 +13,7 @@ public class ScoreManager : StrixBehaviour
     public int totalScore = 0;
 
     [SerializeField]
-    Text scoreText;
+    private Text scoreText;
     void Awake()
     {
         if (instance == null)

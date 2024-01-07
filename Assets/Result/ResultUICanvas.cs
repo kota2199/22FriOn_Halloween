@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ResultUICanvas : MonoBehaviour
@@ -85,10 +86,13 @@ public class ResultUICanvas : MonoBehaviour
 
 
     }
-
-
     public void OpenVirtualBGUrl()
     {
         Application.OpenURL(virtualBGUrls[yokaiIndex]);
+    }
+
+    public void ReturnToTitle()
+    {
+        SceneManager.LoadScene("Title");
     }
 }

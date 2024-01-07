@@ -46,19 +46,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ed6cb7fac6398d41ab9cb317a483420, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreAmount: 0a000000140000001e00000028000000320000003c00000046000000500000005a00000064000000c8000000
+  scoreAmount: 0a000000140000001e00000028000000320000003c0000004600000050000000
   Pieces:
-  - {fileID: 2780598630234121099, guid: 310812808ad06e84199b86fa993979fa, type: 3}
-  - {fileID: 4675982971020537044, guid: e1ad18debea831341a2e3aad30896d5f, type: 3}
-  - {fileID: 6795330613555886523, guid: b9dcdfaf402dd584fb3897eb7c0dee74, type: 3}
-  - {fileID: 3690994692550334715, guid: a7b52d8c92f64614daf4dc3fe2879b96, type: 3}
-  - {fileID: 9076332629935022479, guid: 7259e8cc9b7d95a4f8d2d03ca4833388, type: 3}
-  - {fileID: 8490392518099354428, guid: 46acdb6810df10f4ea858eb8aa084cb9, type: 3}
-  - {fileID: 8970382191656823449, guid: b018d53f9d3a58e4f820d033493ab8ab, type: 3}
-  - {fileID: 1339289298133112603, guid: ca62a878fd6fdf34fb5eb4cb0a0df525, type: 3}
-  - {fileID: 7724038841739368725, guid: 6a7e9a7c3d2947e40bfed3e19ebd5455, type: 3}
-  - {fileID: 6428101225532709283, guid: a2002d5294729d14eb5f514e8cee2459, type: 3}
-  - {fileID: 3367178542019121772, guid: bbf0295e1ded73142bdda2b969fdfd86, type: 3}
+  - {fileID: 6030236910089801317, guid: ed86cf0d8af0f604fbe1c494459b1ad2, type: 3}
+  - {fileID: 1473236531787917704, guid: b3d8c9abb0c7e9448906f4740e55fbfb, type: 3}
+  - {fileID: 7147381663970643747, guid: d43c5de013a559f44a8aad18a456e4e9, type: 3}
+  - {fileID: 7973770406924429320, guid: 88e3dda3666da0841a374a67549a1013, type: 3}
+  - {fileID: 831348422524484898, guid: cf0aa068193a31043aaa39ff7e3fc940, type: 3}
+  - {fileID: 1107434169583945474, guid: d0c2a0c5a91360f4497cac498e21608a, type: 3}
+  - {fileID: 741795761962676798, guid: 0dbebd30c82ade14b967e36f5b71334b, type: 3}
+  - {fileID: 5846412214063675798, guid: a4abfd29aa26c1e408fdbe6129b276e5, type: 3}
   isSimulated: 0
   archiveValue: 0
 --- !u!114 &5950829266648717992
@@ -76,7 +73,7 @@ MonoBehaviour:
   strixBehaviours:
   - {fileID: 3374015445468144360}
   - {fileID: 6069301444903996876}
-  objectType: 16
+  objectType: 7
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1

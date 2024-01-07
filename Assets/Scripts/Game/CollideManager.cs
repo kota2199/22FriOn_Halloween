@@ -15,9 +15,9 @@ public class CollideManager : StrixBehaviour
 
     public TypeOfPiece typeOfPiece;
 
-    GameObject manager;
+    private GameObject manager;
 
-    bool isEnded = false;
+    private bool isEnded = false;
     private void Start()
     {
         manager = GameObject.FindWithTag("Manager");

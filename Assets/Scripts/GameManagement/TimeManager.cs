@@ -15,12 +15,12 @@ public class TimeManager : StrixBehaviour
     public float time = 200;
 
     [SerializeField]
-    Text timerText;
+    private Text timerText;
 
     [SerializeField]
-    GameObject gameOverUi;
+    private GameObject gameOverUi;
 
-    bool isEnded = false;
+    private bool isEnded = false;
 
     // Start is called before the first frame update
     void Awake()

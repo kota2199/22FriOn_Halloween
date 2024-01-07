@@ -6025,7 +6025,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5950829266648717992, guid: 2586170701fd0e2489578a27e6c5d2e5, type: 3}
       propertyPath: objectType
-      value: 524293
+      value: 524294
       objectReference: {fileID: 0}
     - target: {fileID: 6069301444903996876, guid: 2586170701fd0e2489578a27e6c5d2e5, type: 3}
       propertyPath: timerText
@@ -6125,6 +6125,6 @@ SceneRoots:
   - {fileID: 1434909560}
   - {fileID: 1177829163}
   - {fileID: 599200415837536957}
+  - {fileID: 176090847}
   - {fileID: 1553575290548610891}
   - {fileID: 993131980}
-  - {fileID: 176090847}

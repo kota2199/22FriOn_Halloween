@@ -32,8 +32,11 @@ public class SceneController : MonoBehaviour
 
     public void ToNextScene(int index)
     {
-        AudioController.Instance.PlaySe(0);
-            //ƒV[ƒ“‚ğ‘JˆÚ‚·‚é
-            SceneManager.LoadScene(_sceneData.SceneName[index]);
+        SceneManager.LoadScene(_sceneData.SceneName[index]);
+    }
+
+    public void ToNextSceneWithSe(int sceneIndex)
+    {
+        AudioController.Instance.ChangeSceneWithSE(0,sceneIndex);
     }
 }

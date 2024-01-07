@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Piece_4 Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 3869041399799735324, guid: a7b52d8c92f64614daf4dc3fe2879b96, type: 3}
+      propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5119396821980772820, guid: a7b52d8c92f64614daf4dc3fe2879b96, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -55,6 +59,10 @@ PrefabInstance:
     - target: {fileID: 8148752776083131328, guid: a7b52d8c92f64614daf4dc3fe2879b96, type: 3}
       propertyPath: objectType
       value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8148752776083131328, guid: a7b52d8c92f64614daf4dc3fe2879b96, type: 3}
+      propertyPath: InstantiableBy
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

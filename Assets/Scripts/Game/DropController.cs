@@ -8,8 +8,6 @@ public class DropController : StrixBehaviour
 {
     public static DropController instance;
 
-    bool isMovingRight = false, isMovingLeft = false;
-
     public GameObject[] Pieces;
 
     public GameObject[] PiecesForAfterDrop;
@@ -17,15 +15,15 @@ public class DropController : StrixBehaviour
     public GameObject SetPiece;
 
     [SerializeField]
-    GameObject dropButton;
+    private GameObject dropButton;
 
-    bool dropped = true;
+    private bool dropped = true;
 
     [SerializeField]
-    Text playerNameText;
+    private Text playerNameText;
 
     [StrixSyncField]
-    string playerName;
+    private string playerName;
 
     StrixNetwork strixNetwork;
     private void Start()
@@ -47,6 +45,7 @@ public class DropController : StrixBehaviour
     public void RoomJoined()
     {
         RpcToAll(nameof(Displayname));
+        GeneratePiece();
     }
     [StrixRpc]
     public void Displayname()
@@ -54,25 +53,17 @@ public class DropController : StrixBehaviour
         playerName = this.gameObject.GetComponent<StrixReplicator>().roomMember.GetName();
         playerNameText.text = playerName;
     }
-    public void GenerateForWait()
-    {
-        GeneratePiece();
-        dropButton.SetActive(true);
-    }
-
+    [StrixRpc]
     public void GeneratePiece()
     {
-        SetPiece = Instantiate(PieceSet(), transform.position, Quaternion.identity);
+        SetPiece = Instantiate(SetRandomPiece(), transform.position, Quaternion.identity);
+        dropButton.SetActive(true);
     }
-    private GameObject PieceSet()
+    private GameObject SetRandomPiece()
     {
         int randomeNum = Random.Range(0, 3);
         GameObject piece = Pieces[randomeNum];
         return piece;
-        if (!isLocal)
-        {
-            return null;
-        }
     }
     public void DropPiece()
     {
@@ -94,9 +85,14 @@ public class DropController : StrixBehaviour
                     RpcToRoomOwner(nameof(Drop), 2, dropPos);
                     break;
             }
-            Invoke("GenerateForWait", 3f);
+            Invoke("WaitGanerate", 3f);
             Destroy(SetPiece);
         }
+    }
+
+    private void WaitGanerate()
+    {
+        GeneratePiece();
     }
 
     [StrixRpc]
@@ -104,7 +100,6 @@ public class DropController : StrixBehaviour
     {
         GameObject droppedObject = Instantiate(PiecesForAfterDrop[pieceForRegene], PosForRegene, Quaternion.identity);
         droppedObject.GetComponent<CollideManager>().Simulate();
-        dropped = true;
         dropped = true;
     }
 }

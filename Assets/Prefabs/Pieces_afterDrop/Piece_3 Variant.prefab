@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: objectType
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: -9057852194457156043, guid: b9dcdfaf402dd584fb3897eb7c0dee74, type: 3}
+      propertyPath: InstantiableBy
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6178501765189600289, guid: b9dcdfaf402dd584fb3897eb7c0dee74, type: 3}
+      propertyPath: m_Simulated
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6795330613555886523, guid: b9dcdfaf402dd584fb3897eb7c0dee74, type: 3}
       propertyPath: m_Name
       value: Piece_3 Variant

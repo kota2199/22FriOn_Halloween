@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: objectType
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: -1508601502849018809, guid: 310812808ad06e84199b86fa993979fa, type: 3}
+      propertyPath: InstantiableBy
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2780598630234121099, guid: 310812808ad06e84199b86fa993979fa, type: 3}
       propertyPath: m_Name
       value: Piece_1 Variant
@@ -55,6 +59,10 @@ PrefabInstance:
     - target: {fileID: 7286030239763496981, guid: 310812808ad06e84199b86fa993979fa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9074469868393075396, guid: 310812808ad06e84199b86fa993979fa, type: 3}
+      propertyPath: m_Simulated
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

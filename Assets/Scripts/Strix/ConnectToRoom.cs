@@ -10,20 +10,21 @@ using System.Linq;
 
 public class ConnectToRoom : StrixBehaviour
 {
-    string playerName = "Player";
-    string roomName = "Room_A";
+    private string playerName = "Player";
 
-    string webGLHostUrl;
+    private string roomName = "Room_A";
 
-    [SerializeField]
-    Dropdown roomNameField;
-    [SerializeField]
-    Text playerNameField;
+    private string webGLHostUrl;
 
     [SerializeField]
-    GameObject connectPanel, readyUI;
+    private Dropdown roomNameField;
+    [SerializeField]
+    private Text playerNameField;
 
-    StrixNetwork strixNetwork;
+    [SerializeField]
+    private GameObject connectPanel, readyUI;
+
+    private StrixNetwork strixNetwork;
 
     // Start is called before the first frame update
     void Start()

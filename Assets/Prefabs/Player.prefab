@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 15
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.13333334}
   m_FlipX: 0
@@ -179,7 +179,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5588183854783134260
 Transform:
   m_ObjectHideFlags: 0
@@ -307,9 +307,6 @@ MonoBehaviour:
   - {fileID: 8490392518099354428, guid: 46acdb6810df10f4ea858eb8aa084cb9, type: 3}
   - {fileID: 8970382191656823449, guid: b018d53f9d3a58e4f820d033493ab8ab, type: 3}
   - {fileID: 1339289298133112603, guid: ca62a878fd6fdf34fb5eb4cb0a0df525, type: 3}
-  - {fileID: 7724038841739368725, guid: 6a7e9a7c3d2947e40bfed3e19ebd5455, type: 3}
-  - {fileID: 6428101225532709283, guid: a2002d5294729d14eb5f514e8cee2459, type: 3}
-  - {fileID: 3367178542019121772, guid: bbf0295e1ded73142bdda2b969fdfd86, type: 3}
   PiecesForAfterDrop:
   - {fileID: 6030236910089801317, guid: ed86cf0d8af0f604fbe1c494459b1ad2, type: 3}
   - {fileID: 1473236531787917704, guid: b3d8c9abb0c7e9448906f4740e55fbfb, type: 3}
@@ -319,9 +316,6 @@ MonoBehaviour:
   - {fileID: 1107434169583945474, guid: d0c2a0c5a91360f4497cac498e21608a, type: 3}
   - {fileID: 741795761962676798, guid: 0dbebd30c82ade14b967e36f5b71334b, type: 3}
   - {fileID: 5846412214063675798, guid: a4abfd29aa26c1e408fdbe6129b276e5, type: 3}
-  - {fileID: 3295254992097974452, guid: 759a7c73b2c9c2f4fbee1a684a52a221, type: 3}
-  - {fileID: 5158151356931593788, guid: 3440efc30370dcc47973b392a867a6e6, type: 3}
-  - {fileID: 7027971752584484659, guid: ff47a304050304240a82dcc7c7516a7c, type: 3}
   SetPiece: {fileID: 0}
   dropButton: {fileID: 0}
   playerNameText: {fileID: 4304700224041603967}
@@ -341,7 +335,7 @@ MonoBehaviour:
   - {fileID: 3191971249782017787}
   - {fileID: 2047284354786695948}
   - {fileID: 4098540743779754831}
-  objectType: 12
+  objectType: 13
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1

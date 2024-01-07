@@ -30,44 +30,52 @@ public class AudioController : MonoBehaviour
 
     private void Start()
     {
-        source = GetComponent<AudioSource>();
+        //source = GetComponent<AudioSource>();
     }
 
     public AudioController PlaySe(int index)
     {
-        for (int i = 0; i < audioData.Se.Length; i++)
+        GameObject audioObj = new GameObject();
+        audioObj.AddComponent<AudioSource>();
+        source = audioObj.GetComponent<AudioSource>();
+        source.clip = audioData.Se[index].Source;
+        source.Play();
+        StartCoroutine(Checking(source, () =>
         {
-            if (i == index)
-            {
-                source.clip = audioData.Se[i].Source;
-                source.Play();
-                StartCoroutine(Checking(source, () =>
-                {
-                    //音が鳴りやんだら非アクティブにする
-                    source.gameObject.SetActive(false);
-                }));
-            }
-        }
+            Destroy(audioObj);
+        }));
 
         return this;
+    }
 
+    public AudioController ChangeSceneWithSE(int index, int sceneIndex)
+    {
+        GameObject audioObj = new GameObject();
+        audioObj.AddComponent<AudioSource>();
+        source = audioObj.GetComponent<AudioSource>();
+        source.clip = audioData.Se[index].Source;
+        source.Play();
 
+        StartCoroutine(Checking(source, () =>
+        {
+            Destroy(audioObj);
+            SceneController.Instance.ToNextScene(sceneIndex);
+        }));
+
+        return this;
     }
 
     public AudioController PlayJingle(int index)
     {
-        for (int i = 0; i < audioData.Jingles.Length; i++)
+        GameObject audioObj = new GameObject();
+        audioObj.AddComponent<AudioSource>();
+        source = audioObj.GetComponent<AudioSource>();
+        source.clip = audioData.Jingles[index].Source;
+        source.Play();
+        StartCoroutine(Checking(source, () =>
         {
-            if (i == index)
-            {
-                source.clip = audioData.Jingles[i].Source;
-                source.Play();
-                StartCoroutine(Checking(source, () =>
-                {
-                    source.gameObject.SetActive(false);
-                }));
-            }
-        }
+            source.gameObject.SetActive(false);
+        }));
 
         return this;
 
@@ -86,18 +94,15 @@ public class AudioController : MonoBehaviour
 
     public AudioController PlayBgm(int index)
     {
-        for (int i = 0; i < audioData.Bgm.Length; i++)
+        if (source && source.isPlaying)
         {
-            if (i == index)
-            {
-                if (source.isPlaying)
-                {
-                    source.Stop();
-                }
-                source.clip = audioData.Bgm[i].Source;
-                source.Play();
-            }
+            source.Stop();
         }
+        GameObject audioObj = new GameObject();
+        audioObj.AddComponent<AudioSource>();
+        source = audioObj.GetComponent<AudioSource>();
+        source.clip = audioData.Bgm[index].Source;
+        source.Play();
         return this;
     }
 

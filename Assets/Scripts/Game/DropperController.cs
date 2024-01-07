@@ -5,11 +5,7 @@ using UnityEngine;
 public class DropperController : MonoBehaviour
 {
     // Start is called before the first frame update
-    bool isRight = false, isLeft = false;
-    void Start()
-    {
-        
-    }
+    private bool isRight = false, isLeft = false;
 
     // Update is called once per frame
     void Update()

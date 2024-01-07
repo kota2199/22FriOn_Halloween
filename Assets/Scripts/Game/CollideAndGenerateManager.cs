@@ -7,17 +7,17 @@ public class CollideAndGenerateManager : StrixBehaviour
 {
     public static CollideAndGenerateManager instance;
 
-    GameObject hitObj1, hitObj2;
+    private GameObject hitObj1, hitObj2;
 
-    GameObject genePiece;
+    private GameObject genePiece;
 
-    Vector3 genePos;
-
-    [SerializeField]
-    int[] scoreAmount;
+    private Vector3 genePos;
 
     [SerializeField]
-    GameObject[] Pieces;
+    private int[] scoreAmount;
+
+    [SerializeField]
+    private GameObject[] Pieces;
 
     [StrixSyncField]
     public bool isSimulated = false;
@@ -25,7 +25,7 @@ public class CollideAndGenerateManager : StrixBehaviour
     [StrixSyncField]
     public int archiveValue = 0;
 
-    ScoreManager scoreManager;
+    private ScoreManager scoreManager;
 
     void Awake()
     {
@@ -49,22 +49,13 @@ public class CollideAndGenerateManager : StrixBehaviour
         {
             return;
         }
-        /*
-        if(!(hitObj == hitObj2 && selfObj == hitObj1))
-        {
-            hitObj1 = hitObj;
-            hitObj2 = selfObj;
-        }
-        */
 
-        //genePos = (hitObj1.transform.position + hitObj2.transform.position) / 2f;
         genePos = (hitObj.transform.position + selfObj.transform.position) / 2f;
         GenerateNextPiece(type);
     }
 
     void GenerateNextPiece(CollideManager.TypeOfPiece oldType)
     {
-        Debug.Log("GenerateNextPiece");
         switch (oldType)
         {
             case CollideManager.TypeOfPiece.Type1:
@@ -145,6 +136,8 @@ public class CollideAndGenerateManager : StrixBehaviour
 
     void Generate()
     {
-        Instantiate(genePiece, genePos, Quaternion.identity).GetComponent<Rigidbody2D>().simulated = isSimulated;
+        GameObject piece = Instantiate(genePiece, genePos, Quaternion.identity);
+        CollideManager collideManager = piece.GetComponent<CollideManager>();
+        RpcToAll(nameof(collideManager.Simulate));
     }
 }
