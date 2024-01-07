@@ -5,11 +5,11 @@ using UnityEngine;
 public class BGMPlayer : MonoBehaviour
 {
     [SerializeField]
-    private int _selectIndex;
+    private int selectIndex;
 
     // Start is called before the first frame update
     void Start()
     {
-        SEController.Instance.PlayBgm(_selectIndex);
+        AudioController.Instance.PlayBgm(selectIndex);
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "AudioData", menuName = "CreateData/AudioData")]
-public class SEData : ScriptableObject
+public class AudioData : ScriptableObject
 {
     public SE[] Se;
     public Jingle[] Jingles;

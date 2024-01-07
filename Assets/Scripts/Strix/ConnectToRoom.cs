@@ -105,7 +105,7 @@ public class ConnectToRoom : StrixBehaviour
 
     public void SerchRoom()
     {
-        SEController.Instance.PlaySe(0);
+        AudioController.Instance.PlaySe(0);
         playerName = playerNameField.text.ToString();
 
         strixNetwork.SearchRoom

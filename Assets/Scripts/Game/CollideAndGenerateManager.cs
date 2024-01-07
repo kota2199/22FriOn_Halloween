@@ -139,7 +139,7 @@ public class CollideAndGenerateManager : StrixBehaviour
                 scoreManager.AddScore(scoreAmount[7]);
                 break;
         }
-        SEController.Instance.PlaySe(3);
+        AudioController.Instance.PlaySe(3);
         isSimulated = true;
     }
 

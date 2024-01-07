@@ -78,7 +78,7 @@ public class DropController : StrixBehaviour
     {
         if(SetPiece != null)
         {
-            SEController.Instance.PlaySe(2);
+            AudioController.Instance.PlaySe(2);
             Vector3 dropPos = new Vector3(SetPiece.transform.position.x, SetPiece.transform.position.y, SetPiece.transform.position.z);
             CollideManager.TypeOfPiece type = SetPiece.GetComponent<CollideManager>().typeOfPiece;
 

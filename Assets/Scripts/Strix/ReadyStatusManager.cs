@@ -42,7 +42,7 @@ public class ReadyStatusManager : StrixBehaviour
     }
     public void OnReady()
     {
-        SEController.Instance.PlaySe(0);
+        AudioController.Instance.PlaySe(0);
         strixNetwork.SetRoomMember
                (
                    strixNetwork.selfRoomMember.GetPrimaryKey(),
