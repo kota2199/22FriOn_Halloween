@@ -25,14 +25,20 @@ public class CollideManager : StrixBehaviour
     //接触した二つのピースのうち、IDが小さいほうに次のピースを生成する処理を行わせる。
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        int selfId = gameObject.GetInstanceID();
-        int collisionId = collision.gameObject.GetInstanceID();
-
+        //もし互いのピースの種類が一緒だったら
         if (collision.gameObject.GetComponent<CollideManager>()
             && collision.gameObject.GetComponent<CollideManager>().typeOfPiece == typeOfPiece)
         {
+
+            //自身ののInstanceIDを取得する。
+            int selfId = gameObject.GetInstanceID();
+            //接触した相手のInstanceIDを取得する。
+            int collisionId = collision.gameObject.GetInstanceID();
+
+            //自身のIDが接触相手のIDより大きかったら(二つのピースで重複した処理を防止するための分岐)
             if (selfId > collisionId)
             {
+                //ピースの生成をつかさどるクラスに、接触した二つのピースと、ピースの種類の情報を引数にして渡す。
                 manager.GetComponent<CollideAndGenerateManager>().CollideNotice
                     (this.gameObject, collision.gameObject, typeOfPiece);
             }
