@@ -865,6 +865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1df92dd066959c42b81d5fe135bf96d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  appData: {fileID: 0}
   roomNameField: {fileID: 427645709}
   playerNameField: {fileID: 571436080}
   connectPanel: {fileID: 1244645443}
@@ -884,7 +885,7 @@ MonoBehaviour:
   strixBehaviours:
   - {fileID: 383987299}
   - {fileID: 383987298}
-  objectType: 524296
+  objectType: 524290
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1
@@ -2282,6 +2283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1df92dd066959c42b81d5fe135bf96d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  appData: {fileID: 11400000, guid: c13022f38f8fe43c6ba5ef7331290b49, type: 2}
   roomNameField: {fileID: 427645709}
   playerNameField: {fileID: 571436080}
   connectPanel: {fileID: 1244645443}
@@ -2352,7 +2354,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 830921895}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f41b411f53b2994789ab1460c609545, type: 3}
   m_Name: 
@@ -4163,7 +4165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strixBehaviours:
   - {fileID: 1464290453}
-  objectType: 524297
+  objectType: 524292
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1
@@ -5924,7 +5926,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1998963430226793126, guid: f7235a490ef829a46992edc997021f0e, type: 3}
       propertyPath: objectType
-      value: 524292
+      value: 524297
       objectReference: {fileID: 0}
     - target: {fileID: 3609019711295466011, guid: f7235a490ef829a46992edc997021f0e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6025,7 +6027,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5950829266648717992, guid: 2586170701fd0e2489578a27e6c5d2e5, type: 3}
       propertyPath: objectType
-      value: 524289
+      value: 524295
       objectReference: {fileID: 0}
     - target: {fileID: 6069301444903996876, guid: 2586170701fd0e2489578a27e6c5d2e5, type: 3}
       propertyPath: timerText
@@ -6114,9 +6116,10 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 1659930545}
-  - {fileID: 1181264182}
   - {fileID: 8044520968123549695}
+  - {fileID: 1659930545}
+  - {fileID: 993131980}
+  - {fileID: 1181264182}
   - {fileID: 1638456894}
   - {fileID: 864771321}
   - {fileID: 1999714526}
@@ -6127,4 +6130,3 @@ SceneRoots:
   - {fileID: 599200415837536957}
   - {fileID: 176090847}
   - {fileID: 1553575290548610891}
-  - {fileID: 993131980}

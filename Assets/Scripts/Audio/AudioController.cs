@@ -12,13 +12,17 @@ public class AudioController : MonoBehaviour
 
     private static AudioController instance;
 
-    private AudioSource source;
+    [SerializeField]
+    private AudioSource seSource;
+
+    [SerializeField]
+    private AudioSource bgmSource;
 
     private void Awake()
     {
         if (instance == null)
         {
-            source = GetComponent<AudioSource>();
+            seSource = GetComponent<AudioSource>();
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
@@ -28,19 +32,14 @@ public class AudioController : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        //source = GetComponent<AudioSource>();
-    }
-
     public AudioController PlaySe(int index)
     {
         GameObject audioObj = new GameObject();
         audioObj.AddComponent<AudioSource>();
-        source = audioObj.GetComponent<AudioSource>();
-        source.clip = audioData.Se[index].Source;
-        source.Play();
-        StartCoroutine(Checking(source, () =>
+        seSource = audioObj.GetComponent<AudioSource>();
+        seSource.clip = audioData.Se[index].Source;
+        seSource.Play();
+        StartCoroutine(Checking(seSource, () =>
         {
             Destroy(audioObj);
         }));
@@ -52,11 +51,11 @@ public class AudioController : MonoBehaviour
     {
         GameObject audioObj = new GameObject();
         audioObj.AddComponent<AudioSource>();
-        source = audioObj.GetComponent<AudioSource>();
-        source.clip = audioData.Se[index].Source;
-        source.Play();
+        seSource = audioObj.GetComponent<AudioSource>();
+        seSource.clip = audioData.Se[index].Source;
+        seSource.Play();
 
-        StartCoroutine(Checking(source, () =>
+        StartCoroutine(Checking(seSource, () =>
         {
             Destroy(audioObj);
             SceneController.Instance.ToNextScene(sceneIndex);
@@ -69,12 +68,12 @@ public class AudioController : MonoBehaviour
     {
         GameObject audioObj = new GameObject();
         audioObj.AddComponent<AudioSource>();
-        source = audioObj.GetComponent<AudioSource>();
-        source.clip = audioData.Jingles[index].Source;
-        source.Play();
-        StartCoroutine(Checking(source, () =>
+        seSource = audioObj.GetComponent<AudioSource>();
+        seSource.clip = audioData.Jingles[index].Source;
+        seSource.Play();
+        StartCoroutine(Checking(seSource, () =>
         {
-            source.gameObject.SetActive(false);
+            seSource.gameObject.SetActive(false);
         }));
 
         return this;
@@ -94,22 +93,22 @@ public class AudioController : MonoBehaviour
 
     public AudioController PlayBgm(int index)
     {
-        if (source && source.isPlaying)
+        if (bgmSource && bgmSource.isPlaying)
         {
-            source.Stop();
+            bgmSource.Stop();
         }
         GameObject audioObj = new GameObject();
         audioObj.AddComponent<AudioSource>();
-        source = audioObj.GetComponent<AudioSource>();
-        source.clip = audioData.Bgm[index].Source;
-        source.Play();
+        bgmSource = audioObj.GetComponent<AudioSource>();
+        bgmSource.clip = audioData.Bgm[index].Source;
+        bgmSource.Play();
         return this;
     }
 
     public AudioController StopBgm()
     {
-        if (source.isPlaying)
-            source.Stop();
+        if (bgmSource.isPlaying)
+            bgmSource.Stop();
         return this;
     }
 }

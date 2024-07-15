@@ -16,7 +16,8 @@ public class StrixEnterRoom : StrixBehaviour {
     /// 
     string roomName = "Room_A";
 
-    public Dropdown roomNameField;
+    [SerializeField]
+    private Dropdown roomNameField;
 
     /// <summary>
     /// ルーム入室完了時イベント
