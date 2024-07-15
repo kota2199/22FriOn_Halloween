@@ -72,4 +72,4 @@ crashlytics-build.properties
 iOS/
 
 # Strix Applicationkey & HostURL
-/Assets/Data/StrixAppData
+/[Aa]ssets/[Dd]ata/StrixAppData
