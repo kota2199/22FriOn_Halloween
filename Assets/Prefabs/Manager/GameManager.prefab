@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3374015445468144360}
   - component: {fileID: 5950829266648717992}
   - component: {fileID: 6069301444903996876}
+  - component: {fileID: 3953492508441233906}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Manager
@@ -73,6 +74,7 @@ MonoBehaviour:
   strixBehaviours:
   - {fileID: 3374015445468144360}
   - {fileID: 6069301444903996876}
+  - {fileID: 3953492508441233906}
   objectType: 7
   sendRate: 5
   syncDestroy: 1
@@ -95,3 +97,17 @@ MonoBehaviour:
   time: 200
   timerText: {fileID: 0}
   gameOverUi: {fileID: 0}
+--- !u!114 &3953492508441233906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5829663870459427049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fbac82a64c456644b424d33a4d6cee0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalScore: 0
+  scoreText: {fileID: 0}

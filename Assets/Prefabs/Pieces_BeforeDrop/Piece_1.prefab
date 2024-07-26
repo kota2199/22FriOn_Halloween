@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 70047f521f480424d9c3a26055c0a891, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -130,6 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSimulated: 0
   typeOfPiece: 0
+  resultCanvas: {fileID: 0}
 --- !u!114 &-1508601502849018809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NearDistance: 0.001
-  MaxSpeed: 10
+  MaxSpeed: 20
   Acceleration: 100
   Damping: 0
   SyncPeriodMin: 25

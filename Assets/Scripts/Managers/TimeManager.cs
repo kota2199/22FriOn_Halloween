@@ -12,7 +12,7 @@ public class TimeManager : StrixBehaviour
     public bool isPlay = false;
 
     [StrixSyncField]
-    public float time = 200;
+    public float time = 120;
 
     [SerializeField]
     private Text timerText;
@@ -36,7 +36,7 @@ public class TimeManager : StrixBehaviour
     }
     private void Start()
     {
-        timerText.text = time.ToString() + "•b";
+        timerText.text = time.ToString() + "ç§’";
     }
 
     // Update is called once per frame
@@ -45,7 +45,7 @@ public class TimeManager : StrixBehaviour
         if (isPlay)
         {
             time -= Time.deltaTime;
-            timerText.text = time.ToString("f0") + "•b";
+            timerText.text = time.ToString("f0") + "ç§’";
         }
         if(time <= 0f)
         {
@@ -53,11 +53,10 @@ public class TimeManager : StrixBehaviour
             time = 0;
             if (!isEnded)
             {
-                Debug.Log("timeup");
                 int score = ScoreManager.instance.totalScore;
                 int yokaiIndex = CollideAndGenerateManager.instance.archiveValue;
-                Debug.Log("TimeUp");
-                gameOverUi.GetComponent<ResultUICanvas>().SetActiveResultUICanvas(true, score, yokaiIndex, true);
+                gameOverUi.SetActive(true);
+                gameOverUi.GetComponent<ResultUICanvas>().SetActiveResultUICanvas(true, score, yokaiIndex);
                 isEnded = true;
             }
         }

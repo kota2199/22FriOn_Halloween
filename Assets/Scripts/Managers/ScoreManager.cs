@@ -14,6 +14,7 @@ public class ScoreManager : StrixBehaviour
 
     [SerializeField]
     private Text scoreText;
+
     void Awake()
     {
         if (instance == null)
@@ -25,6 +26,7 @@ public class ScoreManager : StrixBehaviour
             Destroy(this.gameObject);
         }
     }
+
     // Start is called before the first frame update
     void Start()
     {

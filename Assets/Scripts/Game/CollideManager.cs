@@ -17,28 +17,25 @@ public class CollideManager : StrixBehaviour
 
     private GameObject manager;
 
+    [SerializeField]
+    private GameObject resultCanvas;
+
     private bool isEnded = false;
     private void Start()
     {
         manager = GameObject.FindWithTag("Manager");
     }
-    //接触した二つのピースのうち、IDが小さいほうに次のピースを生成する処理を行わせる。
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //もし互いのピースの種類が一緒だったら
         if (collision.gameObject.GetComponent<CollideManager>()
             && collision.gameObject.GetComponent<CollideManager>().typeOfPiece == typeOfPiece)
         {
-
-            //自身ののInstanceIDを取得する。
             int selfId = gameObject.GetInstanceID();
-            //接触した相手のInstanceIDを取得する。
             int collisionId = collision.gameObject.GetInstanceID();
 
-            //自身のIDが接触相手のIDより大きかったら(二つのピースで重複した処理を防止するための分岐)
             if (selfId > collisionId)
             {
-                //ピースの生成をつかさどるクラスに、接触した二つのピースと、ピースの種類の情報を引数にして渡す。
                 manager.GetComponent<CollideAndGenerateManager>().CollideNotice
                     (this.gameObject, collision.gameObject, typeOfPiece);
             }
@@ -47,7 +44,6 @@ public class CollideManager : StrixBehaviour
         }
     }
     
-    //GameOverタグを持つオブジェクトと接触したらゲームオーバー
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "GameOver")
@@ -61,6 +57,7 @@ public class CollideManager : StrixBehaviour
     {
         Destroy(gameObject);
     }
+
     [StrixRpc]
     public void Simulate()
     {
@@ -72,7 +69,8 @@ public class CollideManager : StrixBehaviour
     {
         if (!isEnded)
         {
-            GameObject.Find("ReslutUICanvas").GetComponent<ResultUICanvas>().SetActiveResultUICanvas(true, ScoreManager.instance.totalScore, CollideAndGenerateManager.instance.archiveValue, false);
+            resultCanvas.SetActive(true);
+            resultCanvas.GetComponent<ResultUICanvas>().SetActiveResultUICanvas(true, ScoreManager.instance.totalScore, CollideAndGenerateManager.instance.archiveValue);
             isEnded = true;
         }
     }

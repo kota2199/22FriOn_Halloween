@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "StrixAppData", menuName = "CreateData/StrixAppData")]
 public class StrixAppData : ScriptableObject
 {
-    public string applicationID, webGLHostUrl;
+    public string applicationID, hostUrl;
 }

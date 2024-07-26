@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f34d37dc6af47ad9e543079d3003f5, type: 3}
   m_Name: StrixAppData
   m_EditorClassIdentifier: 
-  applicationID: 
-  webGLHostUrl: 
+  applicationID: 3de7734b-7f47-4673-bfb1-5415554765e4
+  hostUrl: 32ae743d6ca4d45daf916f97.game.strixcloud.net

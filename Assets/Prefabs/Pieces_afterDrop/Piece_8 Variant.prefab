@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Piece_8 Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1373006116760708284, guid: ca62a878fd6fdf34fb5eb4cb0a0df525, type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5021643093244098449, guid: ca62a878fd6fdf34fb5eb4cb0a0df525, type: 3}
       propertyPath: m_Simulated
       value: 1

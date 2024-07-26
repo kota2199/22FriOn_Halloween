@@ -11,11 +11,12 @@ using System.Linq;
 public class ReadyStatusManager : StrixBehaviour
 {
     [SerializeField]
-    private GameObject readyUi, countDownUi, waitingUi;
+    private GameObject readyUi, countDownTxt, waitingUi;
 
     [SerializeField]
     private Text countDownText;
 
+    [SerializeField]
     private StrixNetwork strixNetwork;
 
     [SerializeField]
@@ -26,10 +27,22 @@ public class ReadyStatusManager : StrixBehaviour
 
     [SerializeField]
     private GameObject backPanel;
+
+    //Owner's Game Start Button.
+    [SerializeField]
+    private GameObject startButton;
+
+    [SerializeField]
+    private SwitchMenuUI uiSwitcher;
+    
     // Start is called before the first frame update
     void Start()
     {
-        strixNetwork = StrixNetwork.instance;
+        if (strixNetwork == null)
+        {
+            strixNetwork = StrixNetwork.instance;
+        }
+
     }
 
     // Update is called once per frame
@@ -37,9 +50,24 @@ public class ReadyStatusManager : StrixBehaviour
     {
         strixNetwork.roomSession.roomClient.RoomSetMemberNotified += roomSetArgs =>
         {
-            checkAllMembers();
+            RpcToOtherMembers(nameof(HideStartButton));
+            RpcToRoomOwner(nameof(DisplayStartButton));
         };
     }
+
+    [StrixRpc]
+    void DisplayStartButton()
+    {
+        startButton.SetActive(true);
+    }
+
+    [StrixRpc]
+    void HideStartButton()
+    {
+        startButton.SetActive(false);
+    }
+
+    //Called by button
     public void OnReady()
     {
         AudioController.Instance.PlaySe(0);
@@ -57,33 +85,38 @@ public class ReadyStatusManager : StrixBehaviour
                    args =>
                    {
                        Debug.Log("SetRoomMember succeeded");
-                       checkAllMembers();
+                       readyButton.gameObject.SetActive(false);
+                       countDownTxt.SetActive(true);
                    },
                    args => {
                        Debug.Log("SetRoomMember failed. error = " + args.cause);
                    }
                );
-        readyUi.SetActive(false);
-        countDownUi.SetActive(true);
+
     }
-    public void checkAllMembers()
+
+    //Called by owner's start button
+    public void OwnersStart()
     {
-        if (CheckAllRoomMembersState() && strixNetwork.room.GetMemberCount() > 1)
+        if (CheckAllRoomMembersState())
         {
-            if (!isLocal)
-            {
-                return;
-            }
-            CallCountDown();
+            RpcToAll(nameof(CallCountDown));
+            startButton.SetActive(false);
         }
     }
 
-    public void CallCountDown()
+    [StrixRpc]
+    private void CallCountDown()
     {
         StartCoroutine(CountDown());
     }
+
+    [StrixRpc]
     private IEnumerator CountDown()
     {
+        readyUi.SetActive(false);
+        countDownTxt.SetActive(true);
+
         yield return new WaitForSeconds(1);
         countDownText.text = "3";
         yield return new WaitForSeconds(1);
@@ -100,13 +133,14 @@ public class ReadyStatusManager : StrixBehaviour
 
         DropController dropController = player.GetComponent<DropController>();
         dropController.RoomJoined();
-        //RpcToAll(nameof(dropController.GeneratePiece));
         GameObject.FindWithTag("Manager").GetComponent<TimeManager>().CountStart();
-        waitingUi.SetActive(false);
+
+        uiSwitcher.ToGame(uiSwitcher.readyCanvas);
     }
+
+    [StrixRpc]
     public static bool CheckAllRoomMembersState()
     {
-        var room = StrixNetwork.instance.room;
         foreach (var roomMember in StrixNetwork.instance.roomMembers)
         {
             if (!roomMember.Value.GetProperties().TryGetValue("state",

@@ -2,6 +2,7 @@ using SoftGear.Strix.Client.Core.Model.Manager.Filter;
 using SoftGear.Strix.Client.Core.Model.Manager.Filter.Builder;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using SoftGear.Strix.Client.Match.Room.Model;
@@ -10,35 +11,85 @@ using System.Linq;
 
 public class ConnectToRoom : StrixBehaviour
 {
+    /// <summary>
+    /// Data
+    /// </summary>
     [SerializeField]
     private StrixAppData appData;
 
     private string playerName = "Player";
 
-    private string roomName = "Room_A";
-
     private string webGLHostUrl;
 
+    /// <summary>
+    /// Room Create
+    /// </summary>
     [SerializeField]
-    private Dropdown roomNameField;
+    private Text roomNameField;
 
+    [SerializeField]
+    private Text createRoomErrorTxt;
+
+    /// <summary>
+    /// SearchRoom
+    /// </summary>
+    [SerializeField]
+    private GameObject roomInfoObj;
+
+    [SerializeField]
+    private GameObject roomInfoParent;
+
+    /// <summary>
+    /// Register PlayerName
+    /// </summary>
     [SerializeField]
     private Text playerNameField;
 
     [SerializeField]
+    private List<GameObject> roomList = new List<GameObject>();
+
+    /// <summary>
+    /// UIs
+    /// </summary>
+    private SwitchMenuUI uiSwitcher;
+
+    [SerializeField]
     private GameObject connectPanel, readyUI;
 
+    [SerializeField]
+    private CautionPanelController cautionController;
+
+    [SerializeField]
+    private string failRoomEnter, failRoomCreate, faileRoomSearch, othersError;
+
+    private ReadyStatusManager readyManager;
+
+    //instance
     private StrixNetwork strixNetwork;
+
+    private void Awake()
+    {
+        readyManager = GetComponent<ReadyStatusManager>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        strixNetwork = StrixNetwork.instance;
+        uiSwitcher = GetComponent<SwitchMenuUI>();
 
-        webGLHostUrl = "wss://" + appData.webGLHostUrl + ":9122";
+        //Instance作成
+        if (strixNetwork == null)
+        {
+            strixNetwork = StrixNetwork.instance;
+        }
 
+        //Combine URL for WebGL
+        webGLHostUrl = "wss://" + appData.hostUrl + ":9122";
+
+        //Get applicationID
         strixNetwork.applicationId = appData.applicationID;
 
+        //Connect
         strixNetwork.ConnectMasterServer(webGLHostUrl,
             connectEventHandler: _ => {
                 Debug.Log("Connection established.");
@@ -47,94 +98,60 @@ public class ConnectToRoom : StrixBehaviour
         );
     }
 
-    public void ChangeRoom()
+    public void SetPlayerName()
     {
-        if (!isLocal)
-        {
-            return;
-        }
-        if (roomNameField.value == 0)
-        {
-            roomName = "Room_A";
-        }
-        else if (roomNameField.value == 1)
-        {
-            roomName = "Room_B";
-        }
-        else if (roomNameField.value == 2)
-        {
-            roomName = "Room_C";
-        }
-        else if (roomNameField.value == 3)
-        {
-            roomName = "Room_D";
-        }
-        else if (roomNameField.value == 4)
-        {
-            roomName = "Room_E";
-        }
-        else if (roomNameField.value == 5)
-        {
-            roomName = "Room_F";
-        }
-        else if (roomNameField.value == 6)
-        {
-            roomName = "Room_G";
-        }
-        else if (roomNameField.value == 7)
-        {
-            roomName = "Room_H";
-        }
-        else if (roomNameField.value == 8)
-        {
-            roomName = "Room_I";
-        }
-        else if (roomNameField.value == 9)
-        {
-            roomName = "Room_J";
-        }
-        else if (roomNameField.value == 10)
-        {
-            roomName = "Room_K";
-        }
-        else if (roomNameField.value == 11)
-        {
-            roomName = "Room_L";
-        }
-        else if (roomNameField.value == 12)
-        {
-            roomName = "Room_M";
-        }
-        Debug.Log(roomName);
+        playerName = playerNameField.text;
+        SwitchMenuUI switchMenuUI = GetComponent<SwitchMenuUI>();
+        switchMenuUI.ToSerchRoom(switchMenuUI.setPlayerName);
+
+        SerchRoom();
     }
 
     public void SerchRoom()
     {
-        AudioController.Instance.PlaySe(0);
-        playerName = playerNameField.text.ToString();
+        ResetRoomList();
 
-        strixNetwork.SearchRoom
-            (
-                condition: ConditionBuilder.Builder().Field("name").EqualTo(roomName).Build(),
-                limit: 1,
-                offset: 0,
-                handler: searchResults => 
+        StrixNetwork.instance.SearchJoinableRoom(100, 0,
+            args => {
+                foreach (var roomInfo in args.roomInfoCollection)
                 {
-                    if(searchResults.roomInfoCollection.Count < 1)
-                    {
-                        CreatRoom();
-                    }
-                    else
-                    {
-                        Debug.Log(searchResults.roomInfoCollection.Count + " rooms found.");
+                    int listCount = 0;
+                    string roomName = roomInfo.name;
+                    int roomMember = roomInfo.memberCount;
+                    
+                    GameObject roomInfoList = Instantiate(roomInfoObj
+                        , transform.position
+                        , Quaternion.identity);
 
-                        foreach (var roomInfo in searchResults.roomInfoCollection)
-                            JoinRoom(roomInfo.host, roomInfo.port, roomInfo.protocol, roomInfo.id);
-                    }
+                    roomList.Add(roomInfoList);
 
-                },
-                failureHandler: searchError => Debug.Log("Search failed. Reason: " + searchError.cause)
-            );
+                    roomInfoList.transform.SetParent(roomInfoParent.transform);
+
+                    Vector3 genePos = new Vector3(0, listCount * -120, 0);
+                    roomInfoList.GetComponent<RectTransform>().anchoredPosition = genePos;
+
+                    roomInfoList.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+
+                    roomInfoList.transform.Find("background/t_RoomName").gameObject.GetComponent<Text>().text = roomName;
+                    roomInfoList.transform.Find("background/t_NumberOfMember").gameObject.GetComponent<Text>().text = roomMember.ToString() + "/6";
+
+                    JoinRoomBtnController joinRoomBtnController = roomInfoList.GetComponent<JoinRoomBtnController>();
+                    joinRoomBtnController.roomConnector = this;
+                    joinRoomBtnController.roomInfo = roomInfo;
+
+                    listCount++;
+                }
+            },
+            args => {
+                Debug.Log("SearchJoinableRoom failed. error = " + args.cause);
+                cautionController.DisplayCaution(faileRoomSearch);
+            }
+        );
+    }
+
+    private void ResetRoomList()
+    {
+        roomList.Clear();
     }
 
     public void JoinRoom(string host, int port, string protocol, long id)
@@ -165,39 +182,53 @@ public class ConnectToRoom : StrixBehaviour
                           },
                           args => {
                               Debug.Log("SetRoomMember failed. error = " + args.cause);
+                              cautionController.DisplayCaution(failRoomEnter);
                           }
                     );
                     Debug.Log("Room joined.");
+
+                    uiSwitcher.ToReady(uiSwitcher.serchRoom);
+
                 },
-                failureHandler: joinError => Debug.LogError("Join failed. Reason: " + joinError.cause)
+                failureHandler: joinError => {
+                    Debug.LogError("Join failed. Reason: " + joinError.cause);
+                    cautionController.DisplayCaution(failRoomEnter);
+                }
             );
-        connectPanel.SetActive(false);
-        readyUI.SetActive(true);
     }
-    public void CreatRoom()
+
+    public void CreateRoom()
     {
-        strixNetwork.CreateRoom
-            (
+        if(roomNameField.text == "")
+        {
+            createRoomErrorTxt.gameObject.SetActive(true);
+            createRoomErrorTxt.text = "ルーム名を入力してください。";
+        }
+        else
+        {
+            StrixNetwork.instance.CreateRoom(
                 new RoomProperties
                 {
-                    name = roomName,
-                   capacity = 10,
+                    name = roomNameField.text,
+                    capacity = 6,
                 },
                 new RoomMemberProperties
                 {
                     name = playerName,
-                    properties = new Dictionary<string, object>()
-                    {
-                        { "state", 0 }  // ?????????? "Not Ready"
+                    properties = new Dictionary<string, object>() {
+                        { "state", 0 }
                     }
                 },
-                handler: __ =>
-                {
-                    Debug.Log("Room created.");
+                args => {
+                    Debug.Log("CreateRoom succeeded");
+                    uiSwitcher.ToReady(uiSwitcher.createRoom);
                 },
-                failureHandler: createRoomError => Debug.LogError("Could not create room. Reason: " + createRoomError.cause)
+                args => {
+                    Debug.Log("CreateRoom failed. error = " + args.cause);
+                    createRoomErrorTxt.gameObject.SetActive(true);
+                    createRoomErrorTxt.text = "ルーム名を入力し直してください。";
+                }
             );
-        connectPanel.SetActive(false);
-        readyUI.SetActive(true);
+        }
     }
 }

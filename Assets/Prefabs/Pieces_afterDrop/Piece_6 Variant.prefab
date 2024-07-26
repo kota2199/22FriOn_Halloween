@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Simulated
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2330323497881150538, guid: 46acdb6810df10f4ea858eb8aa084cb9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4362596109983917408, guid: 46acdb6810df10f4ea858eb8aa084cb9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -22,6 +22,7 @@ public class CollideAndGenerateManager : StrixBehaviour
     [StrixSyncField]
     public bool isSimulated = false;
 
+    //どの大きさのピースまで作ることが出来たか
     [StrixSyncField]
     public int archiveValue = 0;
 
@@ -41,8 +42,10 @@ public class CollideAndGenerateManager : StrixBehaviour
 
     private void Start()
     {
-        scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+        scoreManager = GameObject.Find("GameManager").GetComponent<ScoreManager>();
     }
+
+    //ピースが接触したときに呼び出される関数。引数は接触した相手のオブジェクト、自身のオブジェクト、ピースの種類
     public void CollideNotice(GameObject hitObj, GameObject selfObj, CollideManager.TypeOfPiece type)
     {
         if (!isLocal)
@@ -50,10 +53,14 @@ public class CollideAndGenerateManager : StrixBehaviour
             return;
         }
 
+        //接触したピースが消えたときにピースを生成する座標(2つのピースの間)
         genePos = (hitObj.transform.position + selfObj.transform.position) / 2f;
+
+        //ピースの種類を引数にして次のピースを生成する関数を呼び出す
         GenerateNextPiece(type);
     }
 
+    //ピースの種類によって次に生成するピースを設定する
     void GenerateNextPiece(CollideManager.TypeOfPiece oldType)
     {
         switch (oldType)
@@ -133,11 +140,14 @@ public class CollideAndGenerateManager : StrixBehaviour
         AudioController.Instance.PlaySe(3);
         isSimulated = true;
     }
-
+    
+    //次のピースを生成する
     void Generate()
     {
         GameObject piece = Instantiate(genePiece, genePos, Quaternion.identity);
         CollideManager collideManager = piece.GetComponent<CollideManager>();
+
+        //Rigidbodyの計算を開始する
         RpcToAll(nameof(collideManager.Simulate));
     }
 }

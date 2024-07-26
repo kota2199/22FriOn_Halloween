@@ -340,6 +340,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ReslutUICanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 393203086842060566, guid: 66b192a62bc407240b24d079cb2daaf9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1283516780622691574, guid: 66b192a62bc407240b24d079cb2daaf9, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1534564348}
     - target: {fileID: 6025758457667849682, guid: 66b192a62bc407240b24d079cb2daaf9, type: 3}
       propertyPath: m_Pivot.x
       value: 0

@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 515574006225275993}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.22, z: 0}
-  m_LocalScale: {x: 0.06, y: 7.8264284, z: 1}
+  m_LocalPosition: {x: 0, y: -3.7856, z: 0}
+  m_LocalScale: {x: 0.06, y: 6.6955094, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7367354655639562561}
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 15
+  m_SortingOrder: 6
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.13333334}
   m_FlipX: 0
@@ -111,7 +111,7 @@ RectTransform:
   m_GameObject: {fileID: 530327824362003787}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6351107063202392218}
@@ -119,7 +119,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 1.42}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 320, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2093534102054423747
 CanvasRenderer:
@@ -151,11 +151,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 95bc5954ab87f7244a668f26ad59309b, type: 3}
-    m_FontSize: 14
+    m_FontSize: 30
     m_FontStyle: 0
-    m_BestFit: 1
-    m_MinSize: 10
-    m_MaxSize: 14
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 33
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -235,7 +235,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 4fb75455157b9384e872f013afdc856e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -257,10 +257,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7367354655639562561}
   - component: {fileID: 3191971249782017787}
+  - component: {fileID: 7243691348864387033}
   - component: {fileID: 8097682066155857495}
   - component: {fileID: 2047284354786695948}
-  - component: {fileID: 4098540743779754831}
-  - component: {fileID: 7243691348864387033}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -319,6 +318,21 @@ MonoBehaviour:
   SetPiece: {fileID: 0}
   dropButton: {fileID: 0}
   playerNameText: {fileID: 4304700224041603967}
+--- !u!114 &7243691348864387033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4385923989917455257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe776e2cdd9b43c41963a6823d5a8dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftKey: 97
+  rightKey: 100
+  dropKey: 13
 --- !u!114 &8097682066155857495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,9 +347,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strixBehaviours:
   - {fileID: 3191971249782017787}
+  - {fileID: 7243691348864387033}
   - {fileID: 2047284354786695948}
-  - {fileID: 4098540743779754831}
-  objectType: 13
+  objectType: 14
   sendRate: 5
   syncDestroy: 1
   networkInstanceId: -1
@@ -357,50 +371,6 @@ MonoBehaviour:
   syncRotation: 1
   syncVelocity: 1
   syncAngularVelocity: 1
---- !u!114 &4098540743779754831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4385923989917455257}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f41b411f53b2994789ab1460c609545, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  capacity: 4
-  roomNameField: {fileID: 0}
-  onRoomEntered:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3191971249782017787}
-        m_TargetAssemblyTypeName: DropController, Assembly-CSharp
-        m_MethodName: RoomJoined
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onRoomEnterFailed:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &7243691348864387033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4385923989917455257}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe776e2cdd9b43c41963a6823d5a8dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4927819126236490477
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,15 +400,15 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3043865385828151778}
   m_Father: {fileID: 7367354655639562561}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.413}
-  m_SizeDelta: {x: 800, y: 449.5238}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 16, y: 9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &3247798871817145424
 Canvas:
@@ -461,7 +431,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 6
   m_TargetDisplay: 0
 --- !u!114 &982986595639381967
 MonoBehaviour:

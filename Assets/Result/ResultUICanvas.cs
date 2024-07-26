@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using SoftGear.Strix.Unity.Runtime;
 
-public class ResultUICanvas : MonoBehaviour
+public class ResultUICanvas : StrixBehaviour
 {
     enum YokaiName{};
-    string[] yokaiNames = { "ˆê‚Â–Ú¬‘m", "‚©‚Á‚Ï", "‚Ê‚ç‚è‚Ğ‚å‚ñ", "’ñ“”‚¨‰»‚¯", "À•~‚í‚ç‚µ", "‚ë‚­‚ëñ", "ƒAƒ}ƒrƒG", "“V‹ç" };
+    string[] yokaiNames = { "ä¸€ã¤ç›®å°åƒ§", "ã‹ã£ã±", "ã¬ã‚‰ã‚Šã²ã‚‡ã‚“", "ã¡ã‚‡ã†ã¡ã‚“", "åº§æ•·ã‚ã‚‰ã—", "ã‚ãã‚é¦–", "ã‚¢ãƒãƒ“ã‚¨", "å¤©ç‹—" };
 
     [SerializeField] Sprite[] yokaiSprites;
 
@@ -18,62 +19,28 @@ public class ResultUICanvas : MonoBehaviour
     [SerializeField] Text resultYokaiNameText;
 
     int yokaiIndex;
+    StrixNetwork strixNetwork;
 
-    [SerializeField] string[] virtualBGUrls =
+    private void Start()
     {
-        "https://fliday-halloween-tyoutin.netlify.app//",
-        "https://fliday-halloween-tyoutin.netlify.app/",
-        "https://fliday-halloween-tyoutin.netlify.app/",
-        "https://fliday-halloween-zasiki.netlify.app//",
-        "https://fliday-halloween-rokuro.netlify.app/",
-        "https://fliday-halloween-amabie.netlify.app/",
-        "https://fliday-halloween-tengu.netlify.app/",
-    };
+        strixNetwork = StrixNetwork.instance;
 
-    [SerializeField] Text flavourText;
-
-    string[] flavourTexts =
-    {
-        "‚¨”æ‚ê‚³‚ÜII",
-        "‚æ‚­Šæ’£‚Á‚½‚ËI",
-        "Ÿ‚Í‚à‚Á‚Æã‚ğ–Úw‚»‚¤I",
-        "‚Ü‚½—V‚ñ‚Å‚Ë",
-    };
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+        // Update is called once per frame
+        void Update()
     {
-        //ƒeƒXƒg—p
         if (Input.GetKeyDown(KeyCode.Space))
         {
             int score = Random.Range(0, 1000)*10;
             int yokaiIndex = Random.Range(0, 8);
-            bool result;
-            if (Random.Range(0f, 1f) < 0.5f)
-                result = true;
-            else
-                result = false;
-            SetActiveResultUICanvas(!gameObject.GetComponent<Canvas>().enabled, score, yokaiIndex, result);
+            SetActiveResultUICanvas(!gameObject.GetComponent<Canvas>().enabled, score, yokaiIndex);
         }
     }
 
-    //ƒQ[ƒ€ƒNƒŠƒA•\¦‚ğ‚·‚é‚Æ‚«‚É‚±‚Ìƒƒ\ƒbƒh‚ğŒÄ‚ñ‚Å‚­‚¾‚³‚¢!
-    //ˆø”1 valueFUI(Canvas)‚ÌCanvasƒRƒ“ƒ|[ƒlƒ“ƒg‚ÌSetActive(value)
-    //ˆø”2 scoreF‚»‚Ì‚Ü‚ÜƒXƒRƒA‚É‚È‚è‚Ü‚·
-    //ˆø”3 yokaiIndexF0`7‚Åw’è‚µ‚Ä‚­‚¾‚³‚¢. —d‰ö‚Ì‰æ‘œA—d‰ö–¼‚ğw’è‚·‚é‚Ì‚É”z—ñ‚Ìindex‚Æ‚µ‚Äg‚¢‚Ü‚·
-    //0‚ªˆê‚Â–Ú¬‘m‚ÅA7‚ª“V‹ç‚Å‚·
-    //ˆø”4 isTimeUpFƒ^ƒCƒ€ƒAƒbƒv‚ÅI—¹‚µ‚½‚©‚Ç‚¤‚©Afalse‚È‚çƒQ[ƒ€ƒI[ƒo[‚Æ‚µ‚ÄI—¹
-    public void SetActiveResultUICanvas(bool value,int score,int yokaiIndex, bool isTimeUp)
+    public void SetActiveResultUICanvas(bool value,int score,int yokaiIndex)
     {
         gameObject.GetComponent<Canvas>().enabled = value;
-
-        resultText.text = isTimeUp ? "ƒ^ƒCƒ€ƒAƒbƒvI" : "ƒQ[ƒ€ƒI[ƒo[I";
         
         resultScoreText.text = score.ToString();
 
@@ -81,18 +48,12 @@ public class ResultUICanvas : MonoBehaviour
         resultYokaiNameText.text = yokaiNames[yokaiIndex];
 
         this.yokaiIndex = yokaiIndex;
-
-        flavourText.text = flavourTexts[Random.Range(0, flavourTexts.Length)];
-
-
-    }
-    public void OpenVirtualBGUrl()
-    {
-        Application.OpenURL(virtualBGUrls[yokaiIndex]);
     }
 
     public void ReturnToTitle()
     {
-        SceneManager.LoadScene("Title");
+        strixNetwork.DisconnectMasterServer();
+        strixNetwork.roomSession.Disconnect();
+        SceneManager.LoadScene("InGame");
     }
 }
