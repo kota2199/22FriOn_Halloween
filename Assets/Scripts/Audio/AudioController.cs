@@ -28,10 +28,11 @@ public class AudioController : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
     }
 
+    //SEを再生する。他のスクリプトからAudioController.Instance.PlaySE(index);で呼び出す事ができる。
     public AudioController PlaySe(int index)
     {
         GameObject audioObj = new GameObject();
@@ -47,6 +48,7 @@ public class AudioController : MonoBehaviour
         return this;
     }
 
+    //SEを再生してシーン遷移したいとき用。他のスクリプトからAudioController.Instance.PlaySE(index, sceneIndex);で呼び出す事ができる。
     public AudioController ChangeSceneWithSE(int index, int sceneIndex)
     {
         GameObject audioObj = new GameObject();
@@ -64,23 +66,7 @@ public class AudioController : MonoBehaviour
         return this;
     }
 
-    public AudioController PlayJingle(int index)
-    {
-        GameObject audioObj = new GameObject();
-        audioObj.AddComponent<AudioSource>();
-        seSource = audioObj.GetComponent<AudioSource>();
-        seSource.clip = audioData.Jingles[index].Source;
-        seSource.Play();
-        StartCoroutine(Checking(seSource, () =>
-        {
-            seSource.gameObject.SetActive(false);
-        }));
-
-        return this;
-
-
-    }
-
+    //ChangeSceneWithSEでSEの鳴り終わりを検知するコルーチン
     private IEnumerator Checking(AudioSource source, Action action)
     {
         yield return new WaitWhile(() => source.isPlaying);

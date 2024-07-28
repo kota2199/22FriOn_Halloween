@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using SoftGear.Strix.Unity.Runtime;
 
-public class CollideManager : StrixBehaviour
+public class CollideNotificator : StrixBehaviour
 {
     [StrixSyncField]
     public bool isSimulated = false;
@@ -20,58 +20,53 @@ public class CollideManager : StrixBehaviour
     [SerializeField]
     private GameObject resultCanvas;
 
-    private bool isEnded = false;
     private void Start()
     {
         manager = GameObject.FindWithTag("Manager");
     }
-    
+
+    //同じタイプのピースと接触したとき
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.GetComponent<CollideManager>()
-            && collision.gameObject.GetComponent<CollideManager>().typeOfPiece == typeOfPiece)
+        if (collision.gameObject.GetComponent<CollideNotificator>()
+            && collision.gameObject.GetComponent<CollideNotificator>().typeOfPiece == typeOfPiece)
         {
+            //自身と接触相手のInstanceIDを比較し、自身のIDのほうが大きい場合NextPieceGeneratorに次のピースの生成処理を飛ばす
             int selfId = gameObject.GetInstanceID();
             int collisionId = collision.gameObject.GetInstanceID();
 
             if (selfId > collisionId)
             {
-                manager.GetComponent<CollideAndGenerateManager>().CollideNotice
+                manager.GetComponent<NextPieceGenerator>().CollideNotice
                     (this.gameObject, collision.gameObject, typeOfPiece);
             }
-            Destroy(this.gameObject);
+
+            //このピースを削除する
             RpcToAll(nameof(DestroyPiece));
         }
     }
-    
+
+    //天井にあるゲームオーバーのラインにピースが触れたらゲームオーバー。TimeManager.GameEndを呼び出す。
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "GameOver")
         {
-            RpcToAll(nameof(GameEnd));
+            TimeManager.instance.RpcToAll(nameof(TimeManager.instance.GameEnd));
         }
     }
 
+    //このピースを削除する
     [StrixRpc]
     void DestroyPiece()
     {
         Destroy(gameObject);
     }
 
+    //ピースのRigidbody2DのSimulatedを有効化
     [StrixRpc]
     public void Simulate()
     {
         isSimulated = true;
         GetComponent<Rigidbody2D>().simulated = isSimulated;
-    }
-    [StrixRpc]
-    public void GameEnd()
-    {
-        if (!isEnded)
-        {
-            resultCanvas.SetActive(true);
-            resultCanvas.GetComponent<ResultUICanvas>().SetActiveResultUICanvas(true, ScoreManager.instance.totalScore, CollideAndGenerateManager.instance.archiveValue);
-            isEnded = true;
-        }
     }
 }

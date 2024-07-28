@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using SoftGear.Strix.Unity.Runtime;
 
-public class CollideAndGenerateManager : StrixBehaviour
+public class NextPieceGenerator : StrixBehaviour
 {
-    public static CollideAndGenerateManager instance;
+    public static NextPieceGenerator instance;
 
     private GameObject hitObj1, hitObj2;
 
@@ -42,11 +42,11 @@ public class CollideAndGenerateManager : StrixBehaviour
 
     private void Start()
     {
-        scoreManager = GameObject.Find("GameManager").GetComponent<ScoreManager>();
+        scoreManager = GetComponent<ScoreManager>();
     }
 
     //ピースが接触したときに呼び出される関数。引数は接触した相手のオブジェクト、自身のオブジェクト、ピースの種類
-    public void CollideNotice(GameObject hitObj, GameObject selfObj, CollideManager.TypeOfPiece type)
+    public void CollideNotice(GameObject hitObj, GameObject selfObj, CollideNotificator.TypeOfPiece type)
     {
         if (!isLocal)
         {
@@ -61,11 +61,11 @@ public class CollideAndGenerateManager : StrixBehaviour
     }
 
     //ピースの種類によって次に生成するピースを設定する
-    void GenerateNextPiece(CollideManager.TypeOfPiece oldType)
+    void GenerateNextPiece(CollideNotificator.TypeOfPiece oldType)
     {
         switch (oldType)
         {
-            case CollideManager.TypeOfPiece.Type1:
+            case CollideNotificator.TypeOfPiece.Type1:
                 scoreManager.AddScore(scoreAmount[0]);
                 if (archiveValue <= 1)
                 {
@@ -75,7 +75,7 @@ public class CollideAndGenerateManager : StrixBehaviour
                 Generate();
                 break;
 
-            case CollideManager.TypeOfPiece.Type2:
+            case CollideNotificator.TypeOfPiece.Type2:
                 scoreManager.AddScore(scoreAmount[1]);
                 if (archiveValue <= 2)
                 {
@@ -85,7 +85,7 @@ public class CollideAndGenerateManager : StrixBehaviour
                 Generate();
                 break;
 
-            case CollideManager.TypeOfPiece.Type3:
+            case CollideNotificator.TypeOfPiece.Type3:
                 scoreManager.AddScore(scoreAmount[2]);
                 if (archiveValue <= 3)
                 {
@@ -95,7 +95,7 @@ public class CollideAndGenerateManager : StrixBehaviour
                 Generate();
                 break;
 
-            case CollideManager.TypeOfPiece.Type4:
+            case CollideNotificator.TypeOfPiece.Type4:
                 scoreManager.AddScore(scoreAmount[3]);
                 if (archiveValue <= 4)
                 {
@@ -104,7 +104,7 @@ public class CollideAndGenerateManager : StrixBehaviour
                 genePiece = Pieces[4];
                 Generate();
                 break;
-            case CollideManager.TypeOfPiece.Type5:
+            case CollideNotificator.TypeOfPiece.Type5:
                 scoreManager.AddScore(scoreAmount[4]);
                 if (archiveValue <= 5)
                 {
@@ -113,7 +113,7 @@ public class CollideAndGenerateManager : StrixBehaviour
                 genePiece = Pieces[5];
                 Generate();
                 break;
-            case CollideManager.TypeOfPiece.Type6:
+            case CollideNotificator.TypeOfPiece.Type6:
                 scoreManager.AddScore(scoreAmount[5]);
                 if (archiveValue <= 6)
                 {
@@ -122,7 +122,7 @@ public class CollideAndGenerateManager : StrixBehaviour
                 genePiece = Pieces[6];
                 Generate();
                 break;
-            case CollideManager.TypeOfPiece.Type7:
+            case CollideNotificator.TypeOfPiece.Type7:
                 scoreManager.AddScore(scoreAmount[6]);
 
                 if (archiveValue <= 7)
@@ -133,7 +133,7 @@ public class CollideAndGenerateManager : StrixBehaviour
                 Generate();
                 break;
 
-            case CollideManager.TypeOfPiece.Type8:
+            case CollideNotificator.TypeOfPiece.Type8:
                 scoreManager.AddScore(scoreAmount[7]);
                 break;
         }
@@ -145,9 +145,9 @@ public class CollideAndGenerateManager : StrixBehaviour
     void Generate()
     {
         GameObject piece = Instantiate(genePiece, genePos, Quaternion.identity);
-        CollideManager collideManager = piece.GetComponent<CollideManager>();
+        CollideNotificator collideNotificator = piece.GetComponent<CollideNotificator>();
 
         //Rigidbodyの計算を開始する
-        RpcToAll(nameof(collideManager.Simulate));
+        RpcToAll(nameof(collideNotificator.Simulate));
     }
 }

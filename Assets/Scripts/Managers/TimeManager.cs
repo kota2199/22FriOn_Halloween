@@ -8,21 +8,23 @@ public class TimeManager : StrixBehaviour
 {
     public static TimeManager instance;
 
+
+    //プレイ中かどうか、経過時間、時間表示用テキストを各クライアントと同期する。
     [StrixSyncField]
     public bool isPlay = false;
 
     [StrixSyncField]
-    public float time = 120;
+    public float remainTime = 120;
 
     [SerializeField]
     private Text timerText;
 
     [SerializeField]
-    private GameObject gameOverUi;
+    private GameObject gameOverUi, resultCanvas;
 
-    private bool isEnded = false;
+    //ゲーム終了時処理を一度だけ呼ぶための値
+    public bool isEnded = false;
 
-    // Start is called before the first frame update
     void Awake()
     {
         if (instance == null)
@@ -36,7 +38,7 @@ public class TimeManager : StrixBehaviour
     }
     private void Start()
     {
-        timerText.text = time.ToString() + "秒";
+        timerText.text = remainTime.ToString() + "秒";
     }
 
     // Update is called once per frame
@@ -44,27 +46,35 @@ public class TimeManager : StrixBehaviour
     {
         if (isPlay)
         {
-            time -= Time.deltaTime;
-            timerText.text = time.ToString("f0") + "秒";
+            remainTime -= Time.deltaTime;
+            timerText.text = remainTime.ToString("f0") + "秒";
         }
-        if(time <= 0f)
+
+        //残り時間が0になったらゲーム終了。
+        if(remainTime <= 0f)
         {
             isPlay = false;
-            time = 0;
-            if (!isEnded)
-            {
-                int score = ScoreManager.instance.totalScore;
-                int yokaiIndex = CollideAndGenerateManager.instance.archiveValue;
-                gameOverUi.SetActive(true);
-                gameOverUi.GetComponent<ResultUICanvas>().SetActiveResultUICanvas(true, score, yokaiIndex);
-                isEnded = true;
-            }
+            remainTime = 0;
+            RpcToAll(nameof(GameEnd));
         }
 
     }
 
+    //ReadyStatusManagerでカウントダウンが終わると呼び出される
     public void CountStart()
     {
         isPlay = true;
+    }
+
+    //ゲームオーバーオブジェクトに接触したときにCollideNotificatorから呼び出される or 残り時間が0になったら呼び出される。
+    [StrixRpc]
+    public void GameEnd()
+    {
+        if (!isEnded)
+        {
+            resultCanvas.SetActive(true);
+            resultCanvas.GetComponent<ResultUIController>().SetActiveResultUICanvas(true, ScoreManager.instance.totalScore, NextPieceGenerator.instance.archiveValue);
+            isEnded = true;
+        }
     }
 }

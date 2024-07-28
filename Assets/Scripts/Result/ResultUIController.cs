@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using SoftGear.Strix.Unity.Runtime;
 
-public class ResultUICanvas : StrixBehaviour
+public class ResultUIController : StrixBehaviour
 {
     enum YokaiName{};
     string[] yokaiNames = { "一つ目小僧", "かっぱ", "ぬらりひょん", "ちょうちん", "座敷わらし", "ろくろ首", "アマビエ", "天狗" };
@@ -27,17 +27,7 @@ public class ResultUICanvas : StrixBehaviour
 
     }
 
-        // Update is called once per frame
-        void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            int score = Random.Range(0, 1000)*10;
-            int yokaiIndex = Random.Range(0, 8);
-            SetActiveResultUICanvas(!gameObject.GetComponent<Canvas>().enabled, score, yokaiIndex);
-        }
-    }
-
+    //引数：リザルト画面の表示ステータス(bool)、スコア、到達できた最大の妖怪のインデックス
     public void SetActiveResultUICanvas(bool value,int score,int yokaiIndex)
     {
         gameObject.GetComponent<Canvas>().enabled = value;
@@ -50,10 +40,13 @@ public class ResultUICanvas : StrixBehaviour
         this.yokaiIndex = yokaiIndex;
     }
 
+    //タイトルへ戻るボタン
     public void ReturnToTitle()
     {
+        //AudioController.Instance.PlaySe(0);
         strixNetwork.DisconnectMasterServer();
         strixNetwork.roomSession.Disconnect();
-        SceneManager.LoadScene("InGame");
+        AudioController.Instance.ChangeSceneWithSE(0, 0);
+        //SceneManager.LoadScene("InGame");
     }
 }

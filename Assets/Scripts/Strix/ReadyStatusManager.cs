@@ -35,7 +35,6 @@ public class ReadyStatusManager : StrixBehaviour
     [SerializeField]
     private SwitchMenuUI uiSwitcher;
     
-    // Start is called before the first frame update
     void Start()
     {
         if (strixNetwork == null)
@@ -45,9 +44,9 @@ public class ReadyStatusManager : StrixBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
+        //ルームにメンバーが参加したとき、オーナーにだけゲーム開始ボタンを表示させる
         strixNetwork.roomSession.roomClient.RoomSetMemberNotified += roomSetArgs =>
         {
             RpcToOtherMembers(nameof(HideStartButton));
@@ -55,19 +54,21 @@ public class ReadyStatusManager : StrixBehaviour
         };
     }
 
+    //ゲーム開始ボタンを表示させる
     [StrixRpc]
     void DisplayStartButton()
     {
         startButton.SetActive(true);
     }
 
+    //ゲーム開始ボタンを非表示にする
     [StrixRpc]
     void HideStartButton()
     {
         startButton.SetActive(false);
     }
 
-    //Called by button
+    //準備OKボタンを押したとき呼び出される
     public void OnReady()
     {
         AudioController.Instance.PlaySe(0);
@@ -95,9 +96,10 @@ public class ReadyStatusManager : StrixBehaviour
 
     }
 
-    //Called by owner's start button
+    //オーナーに表示されているゲームスタートボタンが押されたときに呼び出される
     public void OwnersStart()
     {
+        //全てのメンバーの準備が完了していたら
         if (CheckAllRoomMembersState())
         {
             RpcToAll(nameof(CallCountDown));
@@ -105,13 +107,13 @@ public class ReadyStatusManager : StrixBehaviour
         }
     }
 
+    //CountDownコルーチンを呼び出す。
     [StrixRpc]
     private void CallCountDown()
     {
         StartCoroutine(CountDown());
     }
 
-    [StrixRpc]
     private IEnumerator CountDown()
     {
         readyUi.SetActive(false);
@@ -138,6 +140,7 @@ public class ReadyStatusManager : StrixBehaviour
         uiSwitcher.ToGame(uiSwitcher.readyCanvas);
     }
 
+    //全員の準備が完了しているかをチェックする
     [StrixRpc]
     public static bool CheckAllRoomMembersState()
     {

@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: SceneData
   m_EditorClassIdentifier: 
   Scene:
-  - {fileID: 102900000, guid: 959a83f9f39aec94bbcc3ca027ee26f2, type: 3}
   - {fileID: 102900000, guid: 2cda990e2423bbf4892e6590ba056729, type: 3}
   _SceneName:
-  - Title
   - InGame

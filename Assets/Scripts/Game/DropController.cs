@@ -40,14 +40,14 @@ public class DropController : StrixBehaviour
             return;
         }
 
-        //If player has the piece, match the piece position with the player position.
+        //プレイヤーがピースを持っていたら、プレイヤーの横移動に合わせてピースを移動させる
         if (SetPiece != null)
         {
             SetPiece.transform.position = transform.position;
         }
     }
 
-    //When player join the room, display player name and generate first piece.
+    //プレイヤーがルームに参加したらプレイヤーネームを表示させ、最初のピースを生成する
     public void RoomJoined()
     {
         RpcToAll(nameof(Displayname));
@@ -59,7 +59,7 @@ public class DropController : StrixBehaviour
         GeneratePiece();
     }
 
-    //Display player name
+    //プレイヤーネームを表示
     [StrixRpc]
     public void Displayname()
     {
@@ -67,14 +67,14 @@ public class DropController : StrixBehaviour
         playerNameText.text = playerName;
     }
 
-    //Generate piece
+    //ピースを生成し、プレイヤーに持たせる
     public void GeneratePiece()
     {
         SetPiece = Instantiate(SetRandomPiece(), transform.position, Quaternion.identity);
         dropButton.SetActive(true);
     }
 
-    //Set the object to generate either the first, second, or third piece from the smallest
+    //Type1~3のピースを生成するためのランダムにインデックスを指定する
     private GameObject SetRandomPiece()
     {
         int randomeNum = Random.Range(0, 3);
@@ -82,40 +82,41 @@ public class DropController : StrixBehaviour
         return piece;
     }
 
-
-    public void DropPiece()
+    //落とすピースをセットする
+    public void SetDropPiece()
     {
         if(SetPiece != null)
         {
             AudioController.Instance.PlaySe(2);
 
-            //Assign the coordinates of the piece before it was dropped to the coordinates of the piece that produced the dropped piece.
+            //プレイヤーが持っている表示用のピースの位置から、盤面に落とすピースを生成するための座標を代入
             Vector3 dropPos = new Vector3(SetPiece.transform.position.x, SetPiece.transform.position.y, SetPiece.transform.position.z);
 
-            //Get piece type.
-            CollideManager.TypeOfPiece type = SetPiece.GetComponent<CollideManager>().typeOfPiece;
+            //プレイヤーが持っているピースの種類を取得する
+            CollideNotificator.TypeOfPiece type = SetPiece.GetComponent<CollideNotificator>().typeOfPiece;
 
-            //For each type of piece, select a piece from the piece array and pass it to the Drop function with the piece to be dropped and its coordinates as arguments.
+            //タイプ別にピースをドロップする
             switch (type)
             {
-                case CollideManager.TypeOfPiece.Type1:
+                case CollideNotificator.TypeOfPiece.Type1:
                     RpcToRoomOwner(nameof(Drop), 0, dropPos);
                     break;
-                case CollideManager.TypeOfPiece.Type2:
+                case CollideNotificator.TypeOfPiece.Type2:
                     RpcToRoomOwner(nameof(Drop), 1, dropPos);
                     break;
-                case CollideManager.TypeOfPiece.Type3:
+                case CollideNotificator.TypeOfPiece.Type3:
                     RpcToRoomOwner(nameof(Drop), 2, dropPos);
                     break;
             }
             //Destroy piece
             Destroy(SetPiece);
 
-            //Generate after 3 seconds
+            //3秒後に生成する
             Invoke("ReadyForGenerate", 3f);
         }
     }
 
+    //プレイヤーに次のピースをセットするまで3秒まつ
     void ReadyForGenerate()
     {
         if (!isLocal)
@@ -125,15 +126,14 @@ public class DropController : StrixBehaviour
         GeneratePiece();
     }
 
-    //Drop piece
+    //ピースをドロップする
     [StrixRpc]
     public void Drop(int pieceForRegene, Vector3 PosForRegene)
     {
-        //When each player has a piece, each user is the owner of the object, but once the piece is dropped, the room owner becomes the owner of the object.
         GameObject droppedObject = Instantiate(PiecesForAfterDrop[pieceForRegene], PosForRegene, Quaternion.identity);
 
-        //Start Rigidbody simulate
-        droppedObject.GetComponent<CollideManager>().Simulate();
+        //Rigidbodyのsimulateを開始する
+        droppedObject.GetComponent<CollideNotificator>().Simulate();
 
         dropped = true;
     }

@@ -7,6 +7,6 @@ public class TitleManager : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneController.Instance.ToNextSceneWithSe(1);
+        AudioController.Instance.ChangeSceneWithSE(0, 0);
     }
 }

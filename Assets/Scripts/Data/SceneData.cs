@@ -13,9 +13,6 @@ public class SceneData : ScriptableObject
 
     public string[] SceneName => _SceneName;
 
-    /// <summary>
-    /// •Û‘¶‚·‚é
-    /// </summary>
     public void Save()
     {
         _SceneName = new string[Scene.Length];

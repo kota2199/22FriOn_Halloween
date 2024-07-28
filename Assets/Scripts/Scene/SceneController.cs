@@ -24,19 +24,9 @@ public class SceneController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    //シーンを呼びだす。他のスクリプトからSceneController.Instance.ToNextScene(index);で呼び出す。
     public void ToNextScene(int index)
     {
         SceneManager.LoadScene(_sceneData.SceneName[index]);
-    }
-
-    public void ToNextSceneWithSe(int sceneIndex)
-    {
-        AudioController.Instance.ChangeSceneWithSE(0,sceneIndex);
     }
 }

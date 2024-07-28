@@ -103,6 +103,6 @@ public class DropperController : StrixBehaviour
         {
             return;
         }
-        dropController.DropPiece();
+        dropController.SetDropPiece();
     }
 }
