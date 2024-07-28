@@ -13,3 +13,12 @@
 左移動：Aキー, 画面左下の左ボタン
 
 ピースを落とす：Enter(Return)キー, 画面右下のボタンをクリック
+
+# 使用アセット、フリー素材
+[OtoLogic](https://otologic.jp/)
+
+ゲーム内のSEとして使用
+
+[効果音ラボ](https://soundeffect-lab.info/)
+
+SEとして使用。
