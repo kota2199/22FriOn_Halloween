@@ -3,6 +3,9 @@
 
 ゲームを実行するときはAssets/Scenes/InGameシーンから実行をお願いします。
 
+# Unityroomにて配信中
+[こちら](https://unityroom.com/games/ayakashi_game)からブラウザ上でプレイできます。
+
 # 操作方法
 ## プレイヤーの移動
 右移動：Dキー, 画面左下の右ボタン
