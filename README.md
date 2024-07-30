@@ -1,10 +1,11 @@
 # あやかしゲーム
 こちらは”あやかしゲーム”のUnityプロジェクトです。
 
-ゲームを実行するときはAssets/Scenes/InGameシーンから実行をお願いします。
 
 # Unityroomにて配信中
 [こちら](https://unityroom.com/games/ayakashi_game)からブラウザ上でプレイできます。
+
+Unityエディタ内でゲームを実行するときはAssets/Scenes/InGameシーンから実行をお願いします。
 
 # 操作方法
 ## プレイヤーの移動
