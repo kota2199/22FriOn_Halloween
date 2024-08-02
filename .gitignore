@@ -70,6 +70,3 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 iOS/
-
-# Strix Applicationkey & HostURL
-/[Aa]ssets/[Dd]ata/StrixAppData
