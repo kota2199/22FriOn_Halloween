@@ -1262,8 +1262,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 514197575}
-  - component: {fileID: 514197577}
   - component: {fileID: 514197576}
+  - component: {fileID: 514197577}
   - component: {fileID: 514197578}
   - component: {fileID: 514197579}
   m_Layer: 0
@@ -1354,7 +1354,6 @@ MonoBehaviour:
   readyCanvas: {fileID: 1464290448}
   gameCanvas: {fileID: 1638456890}
   prepareCanvas: {fileID: 1457432303}
-  status: 0
 --- !u!114 &514197579
 MonoBehaviour:
   m_ObjectHideFlags: 0
